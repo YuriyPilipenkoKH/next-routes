@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { comments } from "../data";
 
 
@@ -5,8 +6,11 @@ export async function GET(
     _req: Request,
      {params}: {params: {id: string}} 
      ) {
+    if (parseInt(params.id) > comments.length){
+        redirect("/comments")
+    }    
 
-       const comment = comments.find(c => c.id === parseInt(params.id)) 
+    const comment = comments.find(c => c.id === parseInt(params.id)) 
 
     return new Response(JSON.stringify(comment), {
         headers: { "Content-Type": "application/json" },
