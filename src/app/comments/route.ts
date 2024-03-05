@@ -1,9 +1,15 @@
+import { type NextRequest } from "next/server";
 import { comments } from "./data";
 
-export async function GET() {
-    return new Response(JSON.stringify(comments), {
-        headers: { "Content-Type": "application/json" },
-    });
+export async function GET(req: NextRequest) {
+    const searchParams = req.nextUrl.searchParams
+    const query = searchParams.get("query")
+
+    const filteredComments = query
+    ? comments.filter(c => c.text.toLowerCase().includes(query))
+    : comments
+
+    return Response.json(filteredComments)
 }
 
 export async function POST(req: Request) {
