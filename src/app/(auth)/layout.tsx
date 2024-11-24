@@ -5,7 +5,7 @@ interface Props {
 
 function Layout({ children }: Props) {
   return (
-    <div className='flex flex-col justify-center items-center '>
+    <div className='h-[100vh] flex flex-col gap-4 items-center justify-center bg-[var(--auth-bg)]'>
         Auth
         {children}
     </div>
