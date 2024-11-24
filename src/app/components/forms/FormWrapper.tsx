@@ -1,5 +1,6 @@
 import React from 'react'
 import FormHeader from './FormHeader';
+import { Btn, BtnX } from '../Button/Button';
 
 interface FormWrapperProps {
   children: React.ReactNode;
@@ -29,7 +30,10 @@ const FormWrapper = ({
         </>
        )} 
        <div className='flex w-full justify-center items-center mt-4'>
-
+          <BtnX 
+          href={''}
+          label={''}> 
+          GO </BtnX>
        </div>
     </div>
   )

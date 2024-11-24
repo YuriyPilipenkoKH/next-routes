@@ -4,9 +4,17 @@ import { useRouter } from 'next/navigation';
   interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
       children: React.ReactNode;
     }
+  interface BxProps extends ButtonProps {
+    href: string
+    label: string
+  }  
 
 
   export  const Btn: React.FC<ButtonProps> = ({ children, ...props }) => {
+    return <SBtn type='button' {...props}> {children}</SBtn>;
+  };
+
+  export  const BtnX: React.FC<BxProps> = ({ children, ...props }) => {
     return <SBtn type='button' {...props}> {children}</SBtn>;
   };
 
