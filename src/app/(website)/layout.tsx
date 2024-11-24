@@ -1,12 +1,12 @@
-import React from 'react'
+import { ReactNode } from 'react'
+interface Props {
+    children: ReactNode;
+  }
 
-const Layout = ({
-    children,
-  }: Readonly<{
-    children: React.ReactNode;
-  }>) => {
+function Layout({ children }: Props) {
   return (
-    <div>website
+    <div className='h-full flex flex-col items-center justify-center gap-2 bg-[var(--website-bg)]'>
+        Website
         {children}
     </div>
   )
