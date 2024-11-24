@@ -1,6 +1,6 @@
 import React from 'react'
 import FormHeader from './FormHeader';
-import { Btn, BtnX } from '../Button/Button';
+import { BtnX } from '../Button/Button';
 import SocialLogin from '../OAuth/SocialLogin';
 
 interface FormWrapperProps {
