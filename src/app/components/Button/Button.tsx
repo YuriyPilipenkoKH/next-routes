@@ -15,7 +15,16 @@ import { useRouter } from 'next/navigation';
   };
 
   export  const BtnX: React.FC<BxProps> = ({ children, ...props }) => {
-    return <SBtn type='button' {...props}> {children}</SBtn>;
+    const {href, label} = props
+    const router = useRouter()
+    return <SBtn 
+      type='button' 
+      {...props}
+      onClick={() => router.push(href)} 
+      > 
+      {label}
+      {children}
+    </SBtn>;
   };
 
   export const BtnDelete: React.FC<ButtonProps> = ({ children, ...props }) => {

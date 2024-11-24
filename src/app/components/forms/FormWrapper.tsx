@@ -2,6 +2,7 @@ import React from 'react'
 import FormHeader from './FormHeader';
 import { BtnX } from '../Button/Button';
 import SocialLogin from '../OAuth/SocialLogin';
+import { FaRegistered } from "react-icons/fa";
 
 interface FormWrapperProps {
   children: React.ReactNode;
@@ -32,7 +33,8 @@ const FormWrapper = ({
           <BtnX 
             href={backButtonHref}
             label={backButtonLabel}> 
-            GO </BtnX>
+              <FaRegistered/>
+            </BtnX >
        </div>
     </div>
   )
