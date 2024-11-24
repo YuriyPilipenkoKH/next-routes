@@ -2,7 +2,7 @@ import React from 'react'
 
 const SocialLogin = () => {
   return (
-    <div>SocialLogin</div>
+    <div>SocialLogin component</div>
   )
 }
 

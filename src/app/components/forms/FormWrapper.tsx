@@ -1,6 +1,7 @@
 import React from 'react'
 import FormHeader from './FormHeader';
 import { Btn, BtnX } from '../Button/Button';
+import SocialLogin from '../OAuth/SocialLogin';
 
 interface FormWrapperProps {
   children: React.ReactNode;
@@ -25,9 +26,7 @@ const FormWrapper = ({
           {children}
         </div>
        {showSocial && (
-        <>
-        Social Login
-        </>
+        <SocialLogin/>
        )} 
        <div className='flex w-full justify-center items-center mt-4'>
           <BtnX 
