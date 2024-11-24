@@ -17,7 +17,9 @@ const FormWrapper = ({
   showSocial
 }: FormWrapperProps) => {
   return (
-    <div>FormWrapper</div>
+    <div className='shadow-sm rounded-md bg-green-200'>
+        {children}
+    </div>
   )
 }
 
