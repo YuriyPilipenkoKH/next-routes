@@ -31,9 +31,9 @@ const FormWrapper = ({
        )} 
        <div className='flex w-full justify-center items-center mt-4'>
           <BtnX 
-          href={''}
-          label={''}> 
-          GO </BtnX>
+            href={backButtonHref}
+            label={backButtonLabel}> 
+            GO </BtnX>
        </div>
     </div>
   )
