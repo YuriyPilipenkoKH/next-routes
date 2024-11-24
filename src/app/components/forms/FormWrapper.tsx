@@ -23,6 +23,14 @@ const FormWrapper = ({
         <div className='p-2'>
           {children}
         </div>
+       {showSocial && (
+        <>
+        Social Login
+        </>
+       )} 
+       <div className='flex w-full justify-center items-center mt-4'>
+
+       </div>
     </div>
   )
 }
