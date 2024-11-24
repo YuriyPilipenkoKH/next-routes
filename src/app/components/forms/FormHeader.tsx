@@ -11,7 +11,8 @@ const FormHeader = ({titleLabel}: FormHeaderProps) => {
       <h2 className='text-xl font-semibold '>
         Tracker
       </h2>
-      <p>{titleLabel}</p>
+      <p className='text-sm bg-green-200'>
+        {titleLabel}</p>
     </div>
   )
 }

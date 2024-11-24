@@ -1,4 +1,5 @@
 import React from 'react'
+import FormHeader from './FormHeader';
 
 interface FormWrapperProps {
   children: React.ReactNode;
@@ -18,7 +19,10 @@ const FormWrapper = ({
 }: FormWrapperProps) => {
   return (
     <div className='shadow-sm rounded-md bg-green-200'>
-        {children}
+      <FormHeader titleLabel={titleLabel}/>
+        <div className='p-2'>
+          {children}
+        </div>
     </div>
   )
 }
