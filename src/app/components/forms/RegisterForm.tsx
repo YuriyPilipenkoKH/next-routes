@@ -52,6 +52,8 @@ const {
         // } else {
         //     toast.error(`Failed : ${result.error}`);
         // }
+                    toast.success(`success`!);
+            reset();
       } catch 
       (error) {
         reset();
