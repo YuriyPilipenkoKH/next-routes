@@ -6,6 +6,7 @@ import { RegInput, RegisterSchema } from '@/models/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import toast from 'react-hot-toast'
 import { FormInput } from './FormStyles.styled'
+import { CancelBtn } from '../Button/Button'
 
 const RegisterForm = () => {
   const [logError, setLogError] = useState<string>('')
@@ -101,6 +102,13 @@ const {
             : 'password'}
           />
       </label>
+      <CancelBtn 
+            className='mt-auto '
+            type='submit'
+            disabled={isSubmitting || !isDirty || !isValid}
+                >
+            Register
+        </CancelBtn>
 
     </form>
     </FormWrapper>
