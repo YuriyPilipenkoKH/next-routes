@@ -7,8 +7,9 @@ import { LogInput, LoginSchema } from '@/models/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import toast from 'react-hot-toast'
 import capitalize from '@/lib/capitalize'
-import { FormInput } from './FormStyles.styled'
-import { CancelBtn } from '../Button/Button'
+import { AuthError, FormInput } from './FormStyles.styled'
+import { CancelBtn, FlatBtn } from '../Button/Button'
+import { CgCloseO } from 'react-icons/cg'
 
 
 const LoginForm = () => {
@@ -105,6 +106,17 @@ setLogError('Please fill in all required fields');
                 >
             Login
         </CancelBtn>
+        {( errors?.email || errors?.password ) && (
+				<AuthError className="autherror w-full">
+					{errors.email && <div>{errors.email.message}</div>}
+					{!errors.email && errors.password && <div>{errors.password.message}</div>}
+					{!errors && logError && <div>{logError}</div>}
+					<FlatBtn 
+						onClick={()=>reset()}>
+							<CgCloseO size={30} />
+					</FlatBtn>
+				</AuthError>
+				)}
           
         </form>
     </FormWrapper>
