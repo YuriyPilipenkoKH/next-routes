@@ -48,7 +48,7 @@ const onSubmit = async (data: LogInput) => {
       // const result = await addCollection(formData);
       // if (result.success) {
       //     toast.success(`success`!);
-      //     reset();
+      //     reset(); 
       // } else {
       //     toast.error(`Failed : ${result.error}`);
       // }
