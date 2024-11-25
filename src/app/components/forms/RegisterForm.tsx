@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import { AuthError, FormInput } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
+import { registerUser } from '@/actions/register-user'
 
 const RegisterForm = () => {
   const [logError, setLogError] = useState<string>('')
@@ -45,13 +46,13 @@ const {
 
 
     try {
-        // const result = await addCollection(formData);
-        // if (result.success) {
-        //     toast.success(`success`!);
-        //     reset();
-        // } else {
-        //     toast.error(`Failed : ${result.error}`);
-        // }
+        const result = await  registerUser(formData);
+        if (result.success) {
+            toast.success(`Successfull registration`!);
+            reset();
+        } else {
+            toast.error(`Registration Failed : ${result.error}`);
+        }
                     toast.success(`success`!);
             reset();
       } catch 
