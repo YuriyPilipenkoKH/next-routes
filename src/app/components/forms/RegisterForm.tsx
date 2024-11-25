@@ -56,10 +56,10 @@ const {
             reset();
       } catch 
       (error) {
-        reset();
         const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
         toast.error(`An error occurred: ${errorMessage}`);
         setLogError(errorMessage)
+        reset();
     }
   };
   const handleInputChange = () => {
