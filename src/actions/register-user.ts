@@ -28,8 +28,14 @@ export const registerUser = async(formData: FormData) => {
         email,
         password: hashedPassword
       })
+
+      // Convert Mongoose document to plain object and adjust _id
+      const plainUser = newUser.toObject();
+      // Convert _id to a string
+      plainUser._id = plainUser._id.toString(); 
+
       revalidatePath('/');
-      return { success: true, newUser };
+      return { success: true, user: plainUser };
 
     } catch (error) {
       console.error('Error occured while regestring:', error);

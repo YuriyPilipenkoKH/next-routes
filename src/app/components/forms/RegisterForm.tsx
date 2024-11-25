@@ -48,7 +48,9 @@ const {
     try {
         const result = await  registerUser(formData);
         if (result.success) {
-            toast.success(`Successfull registration`!);
+          console.log('result',result);
+          
+            toast.success(`${result?.user?.name}, Your registration was successfull`!);
             reset();
         } else {
             toast.error(`Registration Failed : ${result.error}`);
