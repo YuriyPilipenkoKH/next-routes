@@ -18,7 +18,6 @@ const LoginForm = () => {
     handleSubmit,
     formState,
     reset,
-    watch
 } = useForm<LogInput>({
     defaultValues: {
         email: '',

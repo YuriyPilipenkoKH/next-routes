@@ -1,4 +1,6 @@
-import {  ModalBaseTypes } from '@/types/modalTypes';
+import { ModalBaseTypes } from "./../types/modalTypes";
+
+
 
 export const DeletingCollectionConfirmProps: ModalBaseTypes = {
   modalName: 'DeletingCollectionConfirm',

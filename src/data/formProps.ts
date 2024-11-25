@@ -15,3 +15,9 @@ export const LoginFormProps: LoginFormBaseTypes = {
   backButtonHref: '/register',
   showSocial: true,
 };
+export const RegisterFormProps: LoginFormBaseTypes = {
+  titleLabel: 'Hi!',
+  backButtonLabel: 'Already have an account?',
+  backButtonHref: '/login',
+  showSocial: true,
+};
