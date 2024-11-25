@@ -1,4 +1,4 @@
-import { FormBaseTypes, LoginFormBaseTypes} from "@/app/types/formTypes";
+import { FormBaseTypes, LoginFormBaseTypes} from "@/types/formTypes";
 
 
 
