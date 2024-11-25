@@ -3,6 +3,7 @@
 import connectMongoDb from "@/lib/mongo";
 import { User } from "@/models/User"
 import {hashSync} from 'bcrypt-ts'
+import { revalidatePath } from "next/cache";
 
 
 export const registerUser = async(formData: FormData) => {
@@ -21,15 +22,22 @@ export const registerUser = async(formData: FormData) => {
         return { success: false, error: "User already exists" };
       }
 
-      const hashedPassword = await hashSync(password)
-      await User.create({
+      const hashedPassword =  hashSync(password)
+      const newUser = await User.create({
         name,
         email,
         password: hashedPassword
       })
-      
+      revalidatePath('/');
+      return { success: true, newUser };
+
     } catch (error) {
-      
+      console.error('Error occured while regestring:', error);
+      let errorMessage = 'An unexpected error occurred';
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      return { success: false, error: errorMessage };
     }
 
   
