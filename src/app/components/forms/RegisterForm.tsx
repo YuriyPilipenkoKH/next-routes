@@ -10,6 +10,7 @@ import { AuthError, FormInput } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { registerUser } from '@/actions/register-user'
+import { wait } from '@/lib/wait'
 
 const RegisterForm = () => {
   const [logError, setLogError] = useState<string>('')
@@ -47,16 +48,16 @@ const {
 
     try {
         const result = await  registerUser(formData);
+
         if (result.success) {
-          console.log('result',result);
+          console.log("User created successfully:", result);
           
-            toast.success(`${result?.user?.name}, Your registration was successfull`!);
+            toast.success(`${result?.user.name}, Your registration was successfull`!);
             reset();
-        } else {
-            toast.error(`Registration Failed : ${result.error}`);
-        }
-                    toast.success(`success`!);
+            await wait(2000)
             reset();
+            window.location.href = '/'; // Redirect the user after success
+        }          
       } catch 
       (error) {
         const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';

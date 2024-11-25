@@ -4,8 +4,7 @@ import connectMongoDb from "@/lib/mongo";
 import { User } from "@/models/User"
 import {hashSync} from 'bcrypt-ts'
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
+
 
 
 export const registerUser = async(formData: FormData) => {
@@ -15,13 +14,13 @@ export const registerUser = async(formData: FormData) => {
 
     // Validation for required fields
     if (!name || !email || !password) {
-      return NextResponse.json({ success: false, error: "All fields are required" }, { status: 400 });
+      return { success: false, error: "All fields are required" }
     }
     try {
       await connectMongoDb()
       const existingUser = await User.findOne({email})
       if (existingUser) {
-        return NextResponse.json({ success: false, error: "User already exists" }, { status: 409 });
+        return { success: false, error: "User already exists" };
       }
 
       const hashedPassword =  hashSync(password)
@@ -30,20 +29,21 @@ export const registerUser = async(formData: FormData) => {
         email,
         password: hashedPassword
       })
-
       // Convert Mongoose document to plain object and adjust _id
       const plainUser = newUser.toObject();
       // Convert _id to a string
       plainUser._id = plainUser._id.toString(); 
+      console.log(plainUser );
+      
 
-      return NextResponse.json({ success: true, user: plainUser }, { status: 201 });
-      revalidatePath('/');
-      redirect('/');
+    revalidatePath('/');
+    return { success: true, user: plainUser };
+
       
     } catch (error) {
       console.error('Error occurred while registering:', error);
       const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
-      return NextResponse.json({ success: false, error: errorMessage }, { status: 500 });
+      return { success: false, error: errorMessage }
     }
 
   
