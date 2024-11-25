@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form'
 import { RegInput, RegisterSchema } from '@/models/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import toast from 'react-hot-toast'
-import { FormInput } from './FormStyles.styled'
-import { CancelBtn } from '../Button/Button'
+import { AuthError, FormInput } from './FormStyles.styled'
+import { CancelBtn, FlatBtn } from '../Button/Button'
+import { CgCloseO } from 'react-icons/cg'
 
 const RegisterForm = () => {
   const [logError, setLogError] = useState<string>('')
@@ -17,6 +18,7 @@ const RegisterForm = () => {
     reset,
 } = useForm<RegInput>({
     defaultValues: {
+        name: '',
         email: '',
         password: '',
     },
@@ -109,6 +111,18 @@ const {
                 >
             Register
         </CancelBtn>
+        {( errors?.email || errors?.password ) && (
+				<AuthError className="autherror w-full">
+					{errors.name && <div>{errors.name.message}</div>}
+					{!errors.name && errors.email && <div>{errors.email.message}</div>}
+					{!errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
+					{!errors && logError && <div>{logError}</div>}
+					<FlatBtn 
+						onClick={()=>reset()}>
+							<CgCloseO size={30} />
+					</FlatBtn>
+				</AuthError>
+				)}
 
     </form>
     </FormWrapper>
