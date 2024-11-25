@@ -63,5 +63,5 @@ export const LoginSchema = z.object({
         }),      
 })
 
-   export type FormInput = z.infer <typeof RegisterSchema >
+   export type RegInput = z.infer <typeof RegisterSchema >
    export type LogInput = z.infer <typeof LoginSchema >
