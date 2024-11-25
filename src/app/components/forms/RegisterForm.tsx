@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { RegInput, RegisterSchema } from '@/models/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import toast from 'react-hot-toast'
+import { FormInput } from './FormStyles.styled'
 
 const RegisterForm = () => {
   const [logError, setLogError] = useState<string>('')
@@ -65,13 +66,41 @@ const {
   setLogError('Please fill in all required fields');
   };
   return (
-    <FormWrapper 
+  <FormWrapper 
     titleLabel={RegisterFormProps.titleLabel}
     backButtonLabel={RegisterFormProps.backButtonLabel}
     backButtonHref={RegisterFormProps.backButtonHref}
     showSocial={RegisterFormProps.showSocial}
   >
-    <form >
+  <form 		
+    onSubmit={handleSubmit(onSubmit, onInvalid)}
+    className='flex flex-col gap-3 items-center'
+    autoComplete="off"
+    noValidate>
+      <label >
+        <FormInput 
+          {...register('name', { onChange: handleInputChange })}
+            placeholder=	{( isSubmitting ) 
+            ? "Processing" 
+            : 'name'}
+          />
+      </label>
+      <label >
+        <FormInput 
+          {...register('email', { onChange: handleInputChange })}
+            placeholder=	{( isSubmitting ) 
+            ? "Processing" 
+            : 'email'}
+          />
+      </label>
+      <label >
+        <FormInput 
+          {...register('password', { onChange: handleInputChange })}
+            placeholder=	{( isSubmitting ) 
+            ? "Processing" 
+            : 'password'}
+          />
+      </label>
 
     </form>
     </FormWrapper>
