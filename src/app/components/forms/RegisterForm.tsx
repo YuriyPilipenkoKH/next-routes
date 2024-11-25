@@ -11,9 +11,11 @@ import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { registerUser } from '@/actions/register-user'
 import { wait } from '@/lib/wait'
+import { useRouter } from 'next/navigation'
 
 const RegisterForm = () => {
   const [logError, setLogError] = useState<string>('')
+  const router = useRouter()
   const {
     register, 
     handleSubmit,
@@ -56,7 +58,8 @@ const {
             reset();
             await wait(2000)
             reset();
-            window.location.href = '/'; // Redirect the user after success
+            router.push('/') // Redirect without reloading page
+            // window.location.href = '/'; // Redirect the user after success
         }          
       } catch 
       (error) {

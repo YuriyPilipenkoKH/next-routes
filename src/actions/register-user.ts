@@ -6,7 +6,6 @@ import {hashSync} from 'bcrypt-ts'
 import { revalidatePath } from "next/cache";
 
 
-
 export const registerUser = async(formData: FormData) => {
   const name = formData.get('name') as string; 
   const email = formData.get('email') as string; 
