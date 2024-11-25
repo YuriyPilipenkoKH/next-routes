@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react'
 import FormWrapper from './FormWrapper'
 import { RegisterFormProps } from '@/data/formProps'
