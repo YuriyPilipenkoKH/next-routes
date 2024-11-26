@@ -34,7 +34,7 @@ export const registerUser = async(formData: FormData) => {
       console.log(plainUser );
       
 
-    revalidatePath('/');
+    revalidatePath('/login');
     return { success: true, user: plainUser };
 
       

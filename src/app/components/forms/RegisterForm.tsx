@@ -58,8 +58,8 @@ const {
             reset();
             await wait(2000)
             reset();
-            router.push('/') // Redirect without reloading page
-            // window.location.href = '/'; // Redirect the user after success
+            router.push('/login') // Redirect without reloading page
+            // window.location.href = '/login'; // Redirect the user after success
         }          
       } 
     catch 
