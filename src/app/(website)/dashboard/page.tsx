@@ -1,8 +1,20 @@
+import { getSession } from '@/lib/getSession'
+import { redirect } from 'next/navigation'
+
 import React from 'react'
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+  const session = await getSession()
+  const user = session?.user
+  const userName= user?.name
+  const userEmail= user?.email
+  if (!session) {
+    redirect('/login')
+  }
   return (
-    <div>DashboardPage</div>
+    <div>
+      Logged in as  {userName}
+    </div>
   )
 }
 
