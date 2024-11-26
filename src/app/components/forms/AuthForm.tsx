@@ -3,7 +3,7 @@ import { registerUser } from '@/actions/register-user'
 import capitalize from '@/lib/capitalize'
 import { wait } from '@/lib/wait'
 import { LogInput, LoginSchema, RegInput, RegisterSchema } from '@/models/auth'
-import { AuthFormBaseTypes } from '@/types/formTypes'
+import { AuthFormBaseTypes, FormInput, FormName } from '@/types/formTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -53,13 +53,19 @@ const {
     isSubmitting,
     isLoading
 } = formState
-const onSubmit = async (data: RegInput) => {
+
+const isRegisterData = (data: LogInput | RegInput): data is RegInput => {
+  return (data as RegInput).name !== undefined;
+};
+const onSubmit = async <T extends FormName>(formName: T, data: FormInput<T>) => {
   // if (!user) {
   //   toast.error('User not found. Please log in.');
   //   return;
   // }
   const formData = new FormData();
-  formData.append('name', data.name);
+  if (formName === 'registerForm' && isRegisterData(data)) {
+    formData.append('name', data.name); // Теперь TypeScript знает, что 'name' существует
+  }
   formData.append('email', data.email);
   formData.append('password', data.password);
 
