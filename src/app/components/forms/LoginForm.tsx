@@ -11,10 +11,13 @@ import { AuthError, FormInput } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { loginUser } from '@/actions/login-user'
+import { wait } from '@/lib/wait'
+import { useRouter } from 'next/navigation'
 
 
 const LoginForm = () => {
   const [logError, setLogError] = useState<string>('')
+  const router = useRouter()
   const {
     register, 
     handleSubmit,
@@ -48,8 +51,11 @@ const onSubmit = async (data: LogInput) => {
   try {
       const result = await loginUser(formData);
       if (result.success) {
-          toast.success(`success`!);
+          toast.success(`${(capitalize(result?.user?.name )) || 'Dude'}, You are logged In`!);
           reset(); 
+          await wait(2000)
+          reset();
+          // router.push('/dashboard')
       } 
     } 
     catch 

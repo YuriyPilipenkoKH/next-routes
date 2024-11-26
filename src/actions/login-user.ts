@@ -18,5 +18,5 @@ export const loginUser = async(formData: FormData) => {
       
 
       revalidatePath('/dashboard');
-      return { success: true, user: {}};
+      return { success: true, user: {name: 'George'}};
 }
