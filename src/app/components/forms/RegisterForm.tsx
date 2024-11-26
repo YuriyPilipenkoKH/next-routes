@@ -12,6 +12,7 @@ import { CgCloseO } from 'react-icons/cg'
 import { registerUser } from '@/actions/register-user'
 import { wait } from '@/lib/wait'
 import { useRouter } from 'next/navigation'
+import capitalize from '@/lib/capitalize'
 
 const RegisterForm = () => {
   const [logError, setLogError] = useState<string>('')
@@ -54,7 +55,7 @@ const {
         if (result.success) {
           console.log("User created successfully:", result);
           
-            toast.success(`${result?.user.name}, Your registration was successfull`!);
+            toast.success(`${capitalize(result?.user.name)}, Your registration was successfull`!);
             reset();
             await wait(2000)
             reset();
@@ -67,7 +68,7 @@ const {
         const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
         toast.error(`An error occurred: ${errorMessage}`);
         setLogError(errorMessage)
-        reset();
+        // reset();
     }
   };
   const handleInputChange = () => {

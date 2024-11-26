@@ -1,3 +1,5 @@
+import { LogInput, RegInput } from "@/models/auth";
+
 export interface FormBaseTypes {
   formName: string;
   dimentions: string[];
@@ -11,3 +13,6 @@ export interface AuthFormBaseTypes {
   showSocial: boolean;
 }
 
+export type FormName = 'loginForm' | 'registerForm';
+
+export type FormInput<T extends FormName> = T extends 'loginForm' ? LogInput : RegInput;
