@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FormWrapper from './FormWrapper'
 import { LoginFormProps } from '@/data/formProps'
 import {useForm} from 'react-hook-form'
@@ -13,39 +13,40 @@ import { CgCloseO } from 'react-icons/cg'
 import { loginUser } from '@/actions/login-user'
 import { wait } from '@/lib/wait'
 import { useRouter } from 'next/navigation'
+import { retrieveToken } from '@/lib/retrieveToken'
 
 
 const LoginForm = () => {
-  const [logError, setLogError] = useState<string>('')
-  const router = useRouter()
+    const [logError, setLogError] = useState<string>('')
+    const router = useRouter()
+    const {
+      register, 
+      handleSubmit,
+      formState,
+      reset,
+  } = useForm<LogInput>({
+      defaultValues: {
+          email: '',
+          password: '',
+      },
+          mode:'all',
+          resolver: zodResolver(LoginSchema),
+    })
   const {
-    register, 
-    handleSubmit,
-    formState,
-    reset,
-} = useForm<LogInput>({
-    defaultValues: {
-        email: '',
-        password: '',
-    },
-        mode:'all',
-        resolver: zodResolver(LoginSchema),
-})
-const {
-    errors,
-    isDirty,
-    isValid ,
-    isSubmitting,
-    isLoading
-} = formState
-const onSubmit = async (data: LogInput) => {
-  // if (!user) {
-  //   toast.error('User not found. Please log in.');
-  //   return;
-  // }
-  const formData = new FormData();
-  formData.append('email', data.email);
-  formData.append('password', data.password);
+      errors,
+      isDirty,
+      isValid ,
+      isSubmitting,
+      isLoading
+  } = formState
+  const onSubmit = async (data: LogInput) => {
+    // if (!user) {
+    //   toast.error('User not found. Please log in.');
+    //   return;
+    // }
+    const formData = new FormData();
+    formData.append('email', data.email);
+    formData.append('password', data.password);
 
 
   try {
@@ -55,7 +56,7 @@ const onSubmit = async (data: LogInput) => {
           reset(); 
           await wait(2000)
           reset();
-          // router.push('/dashboard')
+          router.push('/dashboard')
       } 
     } 
     catch 
@@ -65,17 +66,26 @@ const onSubmit = async (data: LogInput) => {
       setLogError(errorMessage)
       // reset();
   }
-};
-const handleInputChange = () => {
-if (logError) {
-  setLogError('');
-}
-};
+  };
+  const handleInputChange = () => {
+  if (logError) {
+    setLogError('');
+  }
+  };
 
-const onInvalid = () => {
-setLogError('Please fill in all required fields');
-};
+  const onInvalid = () => {
+  setLogError('Please fill in all required fields');
+  };
+  const [csrfToken, setCsrfToken] = useState<string | null>(null); // Локальное состояние для токена
 
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      const token = await retrieveToken(); // Разрешение промиса
+      setCsrfToken(token); // Установка значения в состоянии
+    };
+
+    fetchCsrfToken(); // Запуск загрузки токена
+  }, []);
 
   return (
     <FormWrapper 
@@ -89,6 +99,7 @@ setLogError('Please fill in all required fields');
         className='flex flex-col gap-3 items-center'
         autoComplete="off"
         noValidate>
+         {csrfToken && <input type="hidden" name="csrfToken" value={csrfToken} />}
           <label >
           <FormInput 
             {...register('email', { onChange: handleInputChange })}
