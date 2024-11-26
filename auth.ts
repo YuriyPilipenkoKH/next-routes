@@ -7,7 +7,19 @@ import connectMongoDb from "@/lib/mongo"
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    Google({}),
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      async profile(profile) {
+        // You can customize the user object returned here
+        return {
+          id: profile.id,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture, // Use the correct property for the image
+        };
+      },
+    }),
     Credentials({
       name: 'Credentials',
       credentials: {
@@ -81,7 +93,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
         } catch (error) {
           console.error("Error while creating user:", error);
-          throw new Error("Error while creating user");
+          // throw new Error("Error while creating user");
         }
       }
       return true; // Always return true to continue the sign-in process
