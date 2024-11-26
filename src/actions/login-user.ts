@@ -1,6 +1,4 @@
 'use server'
-
-
 import  {CredentialsSignin} from "next-auth"
 import { revalidatePath } from "next/cache";
 import { signIn } from "../../auth";
