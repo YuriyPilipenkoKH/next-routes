@@ -2,6 +2,7 @@
 
 import connectMongoDb from "@/lib/mongo";
 import { User } from "@/models/User"
+
 import { revalidatePath } from "next/cache";
 
 export const loginUser = async(formData: FormData) => {
@@ -13,4 +14,9 @@ export const loginUser = async(formData: FormData) => {
       if ( !email || !password) {
         return { success: false, error: "All fields are required" }
       }
+      console.log('loginUser is running');
+      
+
+      revalidatePath('/dashboard');
+      return { success: true, user: {}};
 }
