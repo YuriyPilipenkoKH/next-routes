@@ -12,8 +12,9 @@ const DashboardPage = async () => {
     redirect('/login')
   }
   return (
-    <div>
-      Logged in as  {userName}
+    <div className='grid gap-1' >
+      <p>Logged in as  {userName}</p>
+      <p>with email {userEmail}</p>
     </div>
   )
 }
