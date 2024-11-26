@@ -1,6 +1,7 @@
+
 import React from 'react'
-import { signIn } from '../../../../auth';
-import { FcGoogle } from 'react-icons/fc';
+import { signIn } from '../../../../auth'
+import { FcGoogle } from 'react-icons/fc'
 
 const SignInButton = () => {
 
@@ -8,7 +9,7 @@ const SignInButton = () => {
       <form
       className='w-full'
       action={async () => {
-        "use server";
+
         await signIn("google");
       }}
   >

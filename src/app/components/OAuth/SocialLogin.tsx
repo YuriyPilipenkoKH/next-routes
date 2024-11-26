@@ -1,8 +1,11 @@
 import React from 'react'
+import SignInButton from '../Button/SignInButton'
 
 const SocialLogin = () => {
   return (
-    <div>SocialLogin component</div>
+    <div>
+      <SignInButton/>
+    </div>
   )
 }
 
