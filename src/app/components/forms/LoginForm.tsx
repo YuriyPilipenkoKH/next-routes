@@ -10,6 +10,7 @@ import capitalize from '@/lib/capitalize'
 import { AuthError, FormInput } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
+import { loginUser } from '@/actions/login-user'
 
 
 const LoginForm = () => {
@@ -45,19 +46,18 @@ const onSubmit = async (data: LogInput) => {
 
 
   try {
-      // const result = await addCollection(formData);
-      // if (result.success) {
-      //     toast.success(`success`!);
-      //     reset(); 
-      // } else {
-      //     toast.error(`Failed : ${result.error}`);
-      // }
-    } catch 
+      const result = await loginUser(formData);
+      if (result.success) {
+          toast.success(`success`!);
+          reset(); 
+      } 
+    } 
+    catch 
     (error) {
       const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
       toast.error(`An error occurred: ${errorMessage}`);
       setLogError(errorMessage)
-      reset();
+      // reset();
   }
 };
 const handleInputChange = () => {
