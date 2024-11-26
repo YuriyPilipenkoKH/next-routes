@@ -15,8 +15,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           type: 'email'
         },
         password: {
-          label: 'Email',
-          type: 'email'
+          label: 'Password',
+          type: 'string'
         },
       }
 
