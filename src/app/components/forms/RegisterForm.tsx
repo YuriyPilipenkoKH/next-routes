@@ -61,7 +61,8 @@ const {
             router.push('/') // Redirect without reloading page
             // window.location.href = '/'; // Redirect the user after success
         }          
-      } catch 
+      } 
+    catch 
       (error) {
         const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
         toast.error(`An error occurred: ${errorMessage}`);

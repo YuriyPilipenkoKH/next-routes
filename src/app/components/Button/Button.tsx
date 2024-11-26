@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
     label: string
   }  
 
-
   export  const Btn: React.FC<ButtonProps> = ({ children, ...props }) => {
     return <SBtn type='button' {...props}> {children}</SBtn>;
   };
