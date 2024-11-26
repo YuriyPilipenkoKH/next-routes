@@ -1,4 +1,4 @@
-import { FormBaseTypes, LoginFormBaseTypes} from "@/types/formTypes";
+import { FormBaseTypes, AuthFormBaseTypes} from "@/types/formTypes";
 
 
 
@@ -9,13 +9,13 @@ export const AddNewCollectionFormProps: FormBaseTypes = {
   text: '',
 };
 
-export const LoginFormProps: LoginFormBaseTypes = {
+export const LoginFormProps: AuthFormBaseTypes = {
   titleLabel: 'Welcome Back!',
   backButtonLabel: 'Need an account?',
   backButtonHref: '/register',
   showSocial: true,
 };
-export const RegisterFormProps: LoginFormBaseTypes = {
+export const RegisterFormProps: AuthFormBaseTypes = {
   titleLabel: 'Hi!',
   backButtonLabel: 'Already have an account?',
   backButtonHref: '/login',

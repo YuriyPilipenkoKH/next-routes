@@ -4,7 +4,7 @@ export interface FormBaseTypes {
   title?: string;
   text?: string;
 }
-export interface LoginFormBaseTypes {
+export interface AuthFormBaseTypes {
   titleLabel: string;
   backButtonLabel: string;
   backButtonHref: string;
