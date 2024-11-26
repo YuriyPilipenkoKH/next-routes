@@ -1,5 +1,5 @@
 'use client'
-import { LogInput, LoginSchema } from '@/models/auth'
+import { LogInput, LoginSchema, RegisterSchema } from '@/models/auth'
 import { AuthFormBaseTypes } from '@/types/formTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React, { useState } from 'react'
@@ -14,25 +14,31 @@ const AuthForm:React.FC<AuthFormProps> = ({
   formName,
   formProps
 }) => {
+  const [logError, setLogError] = useState<string>('')
   const {
     titleLabel,
     backButtonLabel, 
     backButtonHref, 
     showSocial
   } = formProps
-  const [logError, setLogError] = useState<string>('')
   const {
     register, 
     handleSubmit,
     formState,
     reset,
-} = useForm<LogInput>({
-    defaultValues: {
+} = useForm ({
+    defaultValues: (formName === 'loginForm') ? {
+        email: '',
+        password: '',
+    } : {
+        name: '',
         email: '',
         password: '',
     },
         mode:'all',
-        resolver: zodResolver(LoginSchema),
+        resolver: zodResolver(formName === 'loginForm' 
+          ? LoginSchema 
+          : RegisterSchema),
 })
 const {
     errors,
