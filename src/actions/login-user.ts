@@ -5,6 +5,7 @@ import { User } from "@/models/User"
 import  {CredentialsSignin} from "next-auth"
 import { revalidatePath } from "next/cache";
 import { signIn } from "../../auth";
+import { redirect } from "next/dist/server/api-utils";
 
 export const loginUser = async(formData: FormData) => {
 
@@ -16,6 +17,18 @@ export const loginUser = async(formData: FormData) => {
         return { success: false, error: "All fields are required" }
       }
       console.log('loginUser is running');
+      try {
+        await signIn("credentials", {
+          redirect: false,
+          callbackUrl: "/",
+          email,
+          password,
+        });
+      }
+      catch (error) {
+        const someError = error as CredentialsSignin;
+        return { success: false, error: someError.cause } ;
+      }
       
 
       revalidatePath('/dashboard');
