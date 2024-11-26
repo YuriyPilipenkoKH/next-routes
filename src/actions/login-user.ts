@@ -2,8 +2,9 @@
 
 import connectMongoDb from "@/lib/mongo";
 import { User } from "@/models/User"
-
+import  {CredentialsSignin} from "next-auth"
 import { revalidatePath } from "next/cache";
+import { signIn } from "../../auth";
 
 export const loginUser = async(formData: FormData) => {
 
