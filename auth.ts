@@ -68,5 +68,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
+        try {
+          const { email, name, image, id } = user;
+          await connectMongoDb();
+          const alreadyUser = await User.findOne({ email });
+
+          if (!alreadyUser) {
+            // Create a new user without the role field
+            await User.create({ email, name, image, authProviderId: id });
+          }
+        } catch (error) {
+          console.error("Error while creating user:", error);
+          throw new Error("Error while creating user");
+        }
+      }
+      return true; // Always return true to continue the sign-in process
+    },
   },
 })
