@@ -61,6 +61,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return session;
     },
-    
-  }
+    async jwt({ token, user }) {
+      // Removed token.role as we're no longer using the role field
+      if (user) {
+        token.id = user.id; // Set user ID in the token
+      }
+      return token;
+    },
+  },
 })
