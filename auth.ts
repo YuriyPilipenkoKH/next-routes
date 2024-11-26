@@ -7,7 +7,20 @@ import { User } from "@/models/User"
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Google({}),
-    Credentials({})
+    Credentials({
+      name: 'Credentials',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'email'
+        },
+        password: {
+          label: 'Email',
+          type: 'email'
+        },
+      }
+
+    })
   ],
  
 })
