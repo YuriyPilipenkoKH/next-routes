@@ -1,11 +1,10 @@
 'use server'
 
-import connectMongoDb from "@/lib/mongo";
-import { User } from "@/models/User"
+
 import  {CredentialsSignin} from "next-auth"
 import { revalidatePath } from "next/cache";
 import { signIn } from "../../auth";
-import { redirect } from "next/dist/server/api-utils";
+
 
 export const loginUser = async(formData: FormData) => {
 
@@ -32,5 +31,5 @@ export const loginUser = async(formData: FormData) => {
       
 
       revalidatePath('/dashboard');
-      return { success: true, user: {name: 'George'}};
+      return { success: true, user: {name: ''}};
 }
