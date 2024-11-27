@@ -134,17 +134,23 @@ const AuthForm:React.FC<AuthFormProps> = ({
     noValidate>
       {(formName === 'loginForm') && csrfToken && <input type="hidden" name="csrfToken" value={csrfToken} />}
       {(formName === 'registerForm') && (
-      <label >
-        <FormInput 
-          {...register('name', 
-            { onChange: handleInputChange })}
-            placeholder=	{( isSubmitting ) 
-            ? "Processing" 
-            : 'name'}
-          />
-      </label>
-
-      )}
+      <>
+        <label >
+          <FormInput
+            {...register('name',
+              { onChange: handleInputChange })}
+              placeholder=	{( isSubmitting )
+              ? "Processing"
+              : 'name'}
+            />
+        </label>
+        {errors?.name  && (
+          <AuthError className="autherror w-full">
+            {errors?.name && <div>{errors.name.message}</div>}
+          </AuthError>
+        )}
+      </>
+  )}
       <label >
         <FormInput 
           {...register('email', 
