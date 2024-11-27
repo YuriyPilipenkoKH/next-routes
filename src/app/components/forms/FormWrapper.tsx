@@ -19,6 +19,7 @@ interface FormWrapperProps {
 
 const FormWrapper = ({
   children,
+  formName,
   titleLabel, 
   welcomeMsg,
   backButtonLabel,
@@ -41,7 +42,10 @@ const FormWrapper = ({
           <BtnX 
             href={backButtonHref}
             label={backButtonLabel}> 
-              <FaRegistered/>
+            {(formName === 'loginForm') 
+            ? <FaRegistered/>
+            : <LuKeyRound/>}
+              
             </BtnX >
        </div>
     </div>
