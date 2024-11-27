@@ -15,4 +15,4 @@ export interface AuthFormBaseTypes {
 
 export type FormName = 'loginForm' | 'registerForm';
 
-export type FormInput<T extends FormName> = T extends 'loginForm' ? LogInput : RegInput;
+export type AuthInput<T extends FormName> = T extends 'loginForm' ? LogInput : RegInput;
