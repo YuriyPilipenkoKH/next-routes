@@ -32,6 +32,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
   const router = useRouter()
   const {
     titleLabel,
+    welcomeMsg,
     backButtonLabel, 
     backButtonHref, 
     showSocial
@@ -124,6 +125,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
   return (
     <FormWrapper 
       titleLabel={titleLabel}
+      welcomeMsg={welcomeMsg}     
       backButtonLabel={backButtonLabel}
       backButtonHref={backButtonHref}
       showSocial={showSocial}

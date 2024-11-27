@@ -8,6 +8,7 @@ import { FaRegistered } from "react-icons/fa";
 interface FormWrapperProps {
   children: React.ReactNode;
   titleLabel: string;
+  welcomeMsg: string
   backButtonLabel: string;
   backButtonHref: string;
   showSocial?: boolean
@@ -16,14 +17,18 @@ interface FormWrapperProps {
 
 const FormWrapper = ({
   children,
-  titleLabel,
+  titleLabel, 
+  welcomeMsg,
   backButtonLabel,
   backButtonHref,
   showSocial
 }: FormWrapperProps) => {
   return (
     <div className='shadow-sm rounded-md bg-green-200'>
-      <FormHeader titleLabel={titleLabel}/>
+      <FormHeader 
+      titleLabel={titleLabel}
+      welcomeMsg={welcomeMsg}
+      />
         <div className='p-2'>
           {children}
         </div>

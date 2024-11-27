@@ -18,7 +18,7 @@ export const LoginFormProps: AuthFormBaseTypes = {
 };
 export const RegisterFormProps: AuthFormBaseTypes = {
   titleLabel: 'SignUp',
-  welcomeMsg: 'Hi!',
+  welcomeMsg: 'Hi there!',
   backButtonLabel: 'Already have an account?',
   backButtonHref: '/login',
   showSocial: false,

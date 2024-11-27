@@ -87,6 +87,7 @@ const LoginForm = () => {
   return (
     <FormWrapper 
       titleLabel={LoginFormProps.titleLabel}
+      welcomeMsg={LoginFormProps.welcomeMsg}  
       backButtonLabel={LoginFormProps.backButtonLabel}
       backButtonHref={LoginFormProps.backButtonHref}
       showSocial={LoginFormProps.showSocial}

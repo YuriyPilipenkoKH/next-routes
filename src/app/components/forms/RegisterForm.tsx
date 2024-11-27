@@ -83,6 +83,7 @@ const {
   return (
   <FormWrapper 
     titleLabel={RegisterFormProps.titleLabel}
+    welcomeMsg={RegisterFormProps.welcomeMsg}
     backButtonLabel={RegisterFormProps.backButtonLabel}
     backButtonHref={RegisterFormProps.backButtonHref}
     showSocial={RegisterFormProps.showSocial}
