@@ -65,6 +65,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   pages: {
     signIn: "/login",
+    signOut: "/login", //  The page where the user will be redirected after logging out
   },
   callbacks: {
     async session({ session, token }) {
