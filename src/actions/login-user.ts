@@ -15,14 +15,27 @@ export const loginUser = async(formData: FormData) => {
       if ( !email || !password) {
         return { success: false, error: "All fields are required" }
       }
-      console.log('loginUser is running');
+
       try {
-        await signIn("credentials", {
+        const result =  await signIn("credentials", {
           redirect: false,
           callbackUrl: "/",
           email,
           password,
         });
+
+        if (!result || !result.ok) {
+          return { success: false, error: "Invalid login credentials" };
+        }
+    
+        // Connect to the database and fetch user data
+        await connectMongoDb();
+        const user = await User.findOne({ email });
+    
+        if (!user) {
+          return { success: false, error: "User not found" };
+        }  
+        return { success: true, user: { name: user.name } };
       }
       catch (error) {
         const someError = error as CredentialsSignin;
