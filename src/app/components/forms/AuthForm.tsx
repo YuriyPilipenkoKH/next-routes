@@ -143,7 +143,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
             : 'name'}
           />
       </label>
-      
+
       )}
       <label >
         <FormInput 
@@ -170,7 +170,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
             >
         {formName === 'loginForm' ? 'Login' : 'Register'}
       </CancelBtn>
-      {(errors.email || errors.password  || logError) && (
+      {( errors?.email || errors?.password  || logError) && (
         <AuthError className="autherror w-full">
           {errors.email && <div>{errors.email.message}</div>}
           {!errors.email && errors.password && <div>{errors.password.message}</div>}
