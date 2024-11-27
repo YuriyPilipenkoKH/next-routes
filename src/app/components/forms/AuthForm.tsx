@@ -72,10 +72,7 @@ const onSubmit = async (data: LogInput | RegInput) => {
 
   try {
     if (formName === 'loginForm') {
-      const result = await loginUser({
-        email: data.email,
-        password: data.password,
-      });
+      const result = await loginUser( formData );
       if (result.success) {
         toast.success(
           `${capitalize(result?.user?.name) || 'User'}, you are logged in!`
@@ -84,11 +81,7 @@ const onSubmit = async (data: LogInput | RegInput) => {
         router.push('/dashboard');
       }
     } else {
-      const result = await registerUser({
-        name: (data as RegInput).name,
-        email: data.email,
-        password: data.password,
-      });
+      const result = await registerUser(formData);
       if (result.success) {
         toast.success(
           `${capitalize(result?.user.name)}, your registration was successful!`
@@ -169,13 +162,12 @@ useEffect(() => {
             type='submit'
             disabled={isSubmitting || !isDirty || !isValid}
                 >
-            Register
+            {formName === 'loginForm' ? 'Login' : 'Register'}
         </CancelBtn>
-        {( errors?.email || errors?.password ) && (
+        {(errors.email || errors.password  || logError) && (
 				<AuthError className="autherror w-full">
-					{errors.name && <div>{errors.name.message}</div>}
-					{!errors.name && errors.email && <div>{errors.email.message}</div>}
-					{!errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
+					{errors.email && <div>{errors.email.message}</div>}
+					{!errors.email && errors.password && <div>{errors.password.message}</div>}
 					{!errors && logError && <div>{logError}</div>}
 					<FlatBtn 
 						onClick={()=>reset()}>
