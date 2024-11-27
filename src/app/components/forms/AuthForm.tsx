@@ -145,13 +145,13 @@ const AuthForm:React.FC<AuthFormProps> = ({
               : 'name'}
             />
         </label>
-        {formName === 'registerForm' && errors?.name && (
+        {/* {errors?.name && (
         <AuthError className="autherror w-full">
-          <div>{errors.name.message}</div>
+          <div>{errors.name.message }</div>
         </AuthError>
-        )}
+        )} */}
       </>
-  )}
+      )}
       <label >
         <FormInput 
           {...register('email', 
