@@ -77,7 +77,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
       const result = await loginUser( formData );
       if (result.success) {
         toast.success(
-          `${capitalize(result?.user?.name) || 'User'}, you are logged in!`
+          `${capitalize(result?.user?.name) || 'Dude'}, you are logged in!`
         );
         reset();
         router.push('/dashboard');
@@ -122,16 +122,17 @@ const AuthForm:React.FC<AuthFormProps> = ({
 
   return (
     <FormWrapper 
-    titleLabel={titleLabel}
-    backButtonLabel={backButtonLabel}
-    backButtonHref={backButtonHref}
-    showSocial={showSocial}
+      titleLabel={titleLabel}
+      backButtonLabel={backButtonLabel}
+      backButtonHref={backButtonHref}
+      showSocial={showSocial}
   >
   <form 		
     onSubmit={handleSubmit(onSubmit, onInvalid)}
     className='flex flex-col gap-3 items-center'
     autoComplete="off"
     noValidate>
+      {(formName === 'loginForm') && csrfToken && <input type="hidden" name="csrfToken" value={csrfToken} />}
       {(formName === 'registerForm') && (
       <label >
         <FormInput 
@@ -162,23 +163,23 @@ const AuthForm:React.FC<AuthFormProps> = ({
           />
       </label>
       <CancelBtn 
-            className='mt-auto '
-            type='submit'
-            disabled={isSubmitting || !isDirty || !isValid}
-                >
-            {formName === 'loginForm' ? 'Login' : 'Register'}
-        </CancelBtn>
-        {(errors.email || errors.password  || logError) && (
-				<AuthError className="autherror w-full">
-					{errors.email && <div>{errors.email.message}</div>}
-					{!errors.email && errors.password && <div>{errors.password.message}</div>}
-					{!errors && logError && <div>{logError}</div>}
-					<FlatBtn 
-						onClick={()=>reset()}>
-							<CgCloseO size={30} />
-					</FlatBtn>
-				</AuthError>
-				)}
+        className='mt-auto '
+        type='submit'
+        disabled={isSubmitting || !isDirty || !isValid}
+            >
+        {formName === 'loginForm' ? 'Login' : 'Register'}
+      </CancelBtn>
+      {(errors.email || errors.password  || logError) && (
+        <AuthError className="autherror w-full">
+          {errors.email && <div>{errors.email.message}</div>}
+          {!errors.email && errors.password && <div>{errors.password.message}</div>}
+          {!errors && logError && <div>{logError}</div>}
+          <FlatBtn 
+            onClick={()=>reset()}>
+              <CgCloseO size={30} />
+          </FlatBtn>
+        </AuthError>
+      )}
 
     </form>
     </FormWrapper>
