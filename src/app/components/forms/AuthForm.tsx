@@ -15,7 +15,7 @@ import { AuthError, FormInput,  } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { loginUser } from '@/actions/login-user'
-import { log } from 'console'
+
 
 interface AuthFormProps {
   formName: string
@@ -133,7 +133,6 @@ const AuthForm:React.FC<AuthFormProps> = ({
     autoComplete="off"
     noValidate>
       {(formName === 'registerForm') && (
-
       <label >
         <FormInput 
           {...register('name', 

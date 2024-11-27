@@ -6,8 +6,8 @@ const AuthPage = () => {
   return (
     <div>
       <AuthForm 
-      formName='loginForm'
-      formProps={LoginFormProps}/>
+      formName='registerForm'
+      formProps={RegisterFormProps}/>
     </div>
   )
 }
