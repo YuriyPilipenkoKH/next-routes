@@ -6,7 +6,7 @@ import { googleSignIn } from '@/actions/google-signin'
 const SignInButton = () => {
 
     return (
-      <form
+    <form
       className='w-full'
       action={googleSignIn}
       >

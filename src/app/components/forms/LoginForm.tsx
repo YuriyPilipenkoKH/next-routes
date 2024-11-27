@@ -18,6 +18,7 @@ import { retrieveToken } from '@/lib/retrieveToken'
 
 const LoginForm = () => {
     const [logError, setLogError] = useState<string>('')
+    const [csrfToken, setCsrfToken] = useState<string | null>(null);
     const router = useRouter()
     const {
       register, 
@@ -40,10 +41,7 @@ const LoginForm = () => {
       isLoading
   } = formState
   const onSubmit = async (data: LogInput) => {
-    // if (!user) {
-    //   toast.error('User not found. Please log in.');
-    //   return;
-    // }
+
     const formData = new FormData();
     formData.append('email', data.email);
     formData.append('password', data.password);
@@ -76,15 +74,14 @@ const LoginForm = () => {
   const onInvalid = () => {
   setLogError('Please fill in all required fields');
   };
-  const [csrfToken, setCsrfToken] = useState<string | null>(null); // Локальное состояние для токена
 
   useEffect(() => {
     const fetchCsrfToken = async () => {
-      const token = await retrieveToken(); // Разрешение промиса
-      setCsrfToken(token); // Установка значения в состоянии
+      const token = await retrieveToken(); 
+      setCsrfToken(token); 
     };
 
-    fetchCsrfToken(); // Запуск загрузки токена
+    fetchCsrfToken();
   }, []);
 
   return (
@@ -102,7 +99,8 @@ const LoginForm = () => {
          {csrfToken && <input type="hidden" name="csrfToken" value={csrfToken} />}
           <label >
           <FormInput 
-            {...register('email', { onChange: handleInputChange })}
+            {...register('email', 
+              { onChange: handleInputChange })}
               placeholder=	{( isSubmitting ) 
               ? "Processing" 
               : 'email'}
@@ -110,7 +108,8 @@ const LoginForm = () => {
           </label>
           <label >
           <FormInput 
-            {...register('password', { onChange: handleInputChange })}
+            {...register('password', 
+              { onChange: handleInputChange })}
               placeholder=	{( isSubmitting ) 
               ? "Processing" 
               : 'password'}

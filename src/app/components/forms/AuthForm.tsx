@@ -1,12 +1,13 @@
 'use client'
 import { registerUser } from '@/actions/register-user'
 import capitalize from '@/lib/capitalize'
+import { retrieveToken } from '@/lib/retrieveToken'
 import { wait } from '@/lib/wait'
 import { LogInput, LoginSchema, RegInput, RegisterSchema } from '@/models/auth'
 import { AuthFormBaseTypes, FormInput, FormName } from '@/types/formTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
@@ -20,6 +21,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
   formProps
 }) => {
   const [logError, setLogError] = useState<string>('')
+  const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const router = useRouter()
   const {
     titleLabel,
@@ -64,7 +66,7 @@ const onSubmit = async <T extends FormName>(formName: T, data: FormInput<T>) => 
   // }
   const formData = new FormData();
   if (formName === 'registerForm' && isRegisterData(data)) {
-    formData.append('name', data.name); // Теперь TypeScript знает, что 'name' существует
+    formData.append('name', data.name); 
   }
   formData.append('email', data.email);
   formData.append('password', data.password);
@@ -101,6 +103,16 @@ if (logError) {
 const onInvalid = () => {
 setLogError('Please fill in all required fields');
 };
+
+useEffect(() => {
+  const fetchCsrfToken = async () => {
+    const token = await retrieveToken(); 
+    setCsrfToken(token); 
+  };
+
+  fetchCsrfToken();
+}, []);
+
   return (
     <div>AuthForm</div>
   )
