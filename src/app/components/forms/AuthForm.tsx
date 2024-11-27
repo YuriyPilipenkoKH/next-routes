@@ -15,6 +15,7 @@ import { AuthError, FormInput,  } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { loginUser } from '@/actions/login-user'
+import { log } from 'console'
 
 interface AuthFormProps {
   formName: string
@@ -22,9 +23,10 @@ interface AuthFormProps {
 }
 
 const AuthForm:React.FC<AuthFormProps> = ({
-  formName,
-  formProps
-}) => {
+    formName,
+    formProps
+  }) => {
+  
   const [logError, setLogError] = useState<string>('')
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const router = useRouter()
@@ -39,36 +41,36 @@ const AuthForm:React.FC<AuthFormProps> = ({
     handleSubmit,
     formState,
     reset,
-} = useForm<LogInput | RegInput>({
-  defaultValues:
-  formName === 'loginForm'
-    ? { email: '', password: '' }
-    : { name: '', email: '', password: '' },
-        mode:'all',
-        resolver: zodResolver(formName === 'loginForm' 
-          ? LoginSchema 
-          : RegisterSchema),
-})
-const {
-    errors,
-    isDirty,
-    isValid ,
-    isSubmitting,
-    isLoading
-} = formState
+  } = useForm<LogInput | RegInput>({
+    defaultValues:
+    formName === 'loginForm'
+      ? { email: '', password: '' }
+      : { name: '', email: '', password: '' },
+          mode:'all',
+          resolver: zodResolver(formName === 'loginForm' 
+            ? LoginSchema 
+            : RegisterSchema),
+  })
+  const {
+      errors,
+      isDirty,
+      isValid ,
+      isSubmitting,
+      isLoading
+  } = formState
 
-const isRegisterData = (data: LogInput | RegInput): data is RegInput => {
-  return (data as RegInput).name !== undefined;
-};
+  const isRegisterData = (data: LogInput | RegInput): data is RegInput => {
+    return (data as RegInput).name !== undefined;
+  };
 
 
-const onSubmit = async (data: LogInput | RegInput) => {
-    const formData = new FormData();
-  if (formName === 'registerForm' && isRegisterData(data)) {
-    formData.append('name', data.name); 
-  }
-  formData.append('email', data.email);
-  formData.append('password', data.password);
+  const onSubmit = async (data: LogInput | RegInput) => {
+      const formData = new FormData();
+    if (formName === 'registerForm' && isRegisterData(data)) {
+      formData.append('name', data.name); 
+    }
+    formData.append('email', data.email);
+    formData.append('password', data.password);
 
   try {
     if (formName === 'loginForm') {
@@ -96,27 +98,27 @@ const onSubmit = async (data: LogInput | RegInput) => {
     setLogError(errorMessage);
     toast.error(`An error occurred: ${errorMessage}`);
   }
-};
-
-
-const handleInputChange = () => {
-if (logError) {
-  setLogError('');
-}
-};
-
-const onInvalid = () => {
-setLogError('Please fill in all required fields');
-};
-
-useEffect(() => {
-  const fetchCsrfToken = async () => {
-    const token = await retrieveToken(); 
-    setCsrfToken(token); 
   };
 
-  fetchCsrfToken();
-}, []);
+
+  const handleInputChange = () => {
+  if (logError) {
+    setLogError('');
+  }
+  };
+
+  const onInvalid = () => {
+  setLogError('Please fill in all required fields');
+  };
+
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      const token = await retrieveToken(); 
+      setCsrfToken(token); 
+    };
+
+    fetchCsrfToken();
+  }, []);
 
   return (
     <FormWrapper 
@@ -130,6 +132,8 @@ useEffect(() => {
     className='flex flex-col gap-3 items-center'
     autoComplete="off"
     noValidate>
+      {(formName === 'registerForm') && (
+
       <label >
         <FormInput 
           {...register('name', 
@@ -139,6 +143,7 @@ useEffect(() => {
             : 'name'}
           />
       </label>
+      )}
       <label >
         <FormInput 
           {...register('email', 
