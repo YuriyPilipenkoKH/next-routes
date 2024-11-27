@@ -8,6 +8,7 @@ export interface FormBaseTypes {
 }
 export interface AuthFormBaseTypes {
   titleLabel: string;
+  welcomeMsg: string
   backButtonLabel: string;
   backButtonHref: string;
   showSocial: boolean;

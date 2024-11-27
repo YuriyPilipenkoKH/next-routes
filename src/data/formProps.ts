@@ -10,13 +10,15 @@ export const AddNewCollectionFormProps: FormBaseTypes = {
 };
 
 export const LoginFormProps: AuthFormBaseTypes = {
-  titleLabel: 'Welcome Back!',
+  titleLabel: 'LogIn',
+  welcomeMsg: 'Welcome Back!',
   backButtonLabel: 'Need an account?',
   backButtonHref: '/register',
   showSocial: true,
 };
 export const RegisterFormProps: AuthFormBaseTypes = {
-  titleLabel: 'Hi!',
+  titleLabel: 'SignUp',
+  welcomeMsg: 'Hi!',
   backButtonLabel: 'Already have an account?',
   backButtonHref: '/login',
   showSocial: false,

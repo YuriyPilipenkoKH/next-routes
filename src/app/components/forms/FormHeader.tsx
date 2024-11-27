@@ -9,7 +9,7 @@ const FormHeader = ({titleLabel}: FormHeaderProps) => {
   return (
     <div className='w-full flex flex-col space-y-1 items-center justify-center'>
       <h2 className='text-xl font-semibold '>
-        Next-JS-Routes
+        Next-Routes
       </h2>
       <p className='text-sm bg-green-200'>
         {titleLabel}</p>
