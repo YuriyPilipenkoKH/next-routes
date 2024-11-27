@@ -123,7 +123,7 @@ const {
                 >
             Register
         </CancelBtn>
-        {( errors?.email || errors?.password ) && (
+        {(errors?.name || errors?.email || errors?.password ) && (
 				<AuthError className="autherror w-full">
 					{errors.name && <div>{errors.name.message}</div>}
 					{!errors.name && errors.email && <div>{errors.email.message}</div>}

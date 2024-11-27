@@ -143,6 +143,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
             : 'name'}
           />
       </label>
+      
       )}
       <label >
         <FormInput 
