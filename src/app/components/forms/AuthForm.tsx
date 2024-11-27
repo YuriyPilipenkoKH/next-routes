@@ -124,6 +124,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
 
   return (
     <FormWrapper 
+      formName={formName}
       titleLabel={titleLabel}
       welcomeMsg={welcomeMsg}     
       backButtonLabel={backButtonLabel}

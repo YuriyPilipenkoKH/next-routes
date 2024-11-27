@@ -4,9 +4,11 @@ import FormHeader from './FormHeader';
 import { BtnX } from '../Button/Button';
 import SocialLogin from '../OAuth/SocialLogin';
 import { FaRegistered } from "react-icons/fa";
+import { LuKeyRound } from "react-icons/lu";
 
 interface FormWrapperProps {
   children: React.ReactNode;
+  formName: string
   titleLabel: string;
   welcomeMsg: string
   backButtonLabel: string;

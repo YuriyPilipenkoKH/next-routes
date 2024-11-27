@@ -14,7 +14,14 @@ import { wait } from '@/lib/wait'
 import { useRouter } from 'next/navigation'
 import capitalize from '@/lib/capitalize'
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  formName: string
+}
+
+
+const RegisterForm: React.FC<RegisterFormProps> = ({
+  formName
+}) => {
   const [logError, setLogError] = useState<string>('')
   const router = useRouter()
   const {
@@ -82,6 +89,7 @@ const {
   };
   return (
   <FormWrapper 
+    formName={formName}
     titleLabel={RegisterFormProps.titleLabel}
     welcomeMsg={RegisterFormProps.welcomeMsg}
     backButtonLabel={RegisterFormProps.backButtonLabel}

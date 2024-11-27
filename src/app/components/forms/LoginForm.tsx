@@ -15,8 +15,14 @@ import { wait } from '@/lib/wait'
 import { useRouter } from 'next/navigation'
 import { retrieveToken } from '@/lib/retrieveToken'
 
+interface LoginFormProps {
+  formName: string
+}
 
-const LoginForm = () => {
+
+const LoginForm: React.FC<LoginFormProps> = ({
+    formName
+  }) => {
     const [logError, setLogError] = useState<string>('')
     const [csrfToken, setCsrfToken] = useState<string | null>(null);
     const router = useRouter()
@@ -86,6 +92,7 @@ const LoginForm = () => {
 
   return (
     <FormWrapper 
+      formName={formName}
       titleLabel={LoginFormProps.titleLabel}
       welcomeMsg={LoginFormProps.welcomeMsg}  
       backButtonLabel={LoginFormProps.backButtonLabel}

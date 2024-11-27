@@ -10,7 +10,7 @@ const LoginPage = async () => {
   }
   return (
     <div>
-      <LoginForm/>
+      <LoginForm formName='loginForm' />
     </div>
   )
 }
