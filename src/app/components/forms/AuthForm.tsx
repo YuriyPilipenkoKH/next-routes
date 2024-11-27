@@ -120,6 +120,7 @@ const AuthForm:React.FC<AuthFormProps> = ({
     fetchCsrfToken();
   }, []);
 
+
   return (
     <FormWrapper 
       titleLabel={titleLabel}
@@ -144,10 +145,10 @@ const AuthForm:React.FC<AuthFormProps> = ({
               : 'name'}
             />
         </label>
-        {errors?.name  && (
-          <AuthError className="autherror w-full">
-            {errors?.name && <div>{errors.name.message}</div>}
-          </AuthError>
+        {formName === 'registerForm' && errors?.name && (
+        <AuthError className="autherror w-full">
+          <div>{errors.name.message}</div>
+        </AuthError>
         )}
       </>
   )}
@@ -215,3 +216,8 @@ export default AuthForm
   //   toast.error('User not found. Please log in.');
   //   return;
   // }
+
+
+    // const hasNameError = (errors: FieldErrors<any>): errors is FieldErrors<{ name: string }> => {
+  //   return 'name' in errors;
+  // };
