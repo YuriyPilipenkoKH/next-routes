@@ -17,6 +17,13 @@ export const loginUser = async(formData: FormData) => {
       }
 
       try {
+                // Connect to the database and fetch user data
+        await connectMongoDb();
+        const user = await User.findOne({ email });
+    
+        // if (!user) {
+        //   return { success: false, error: "User not found" };
+        // }  
         const result =  await signIn("credentials", {
           redirect: false,
           callbackUrl: "/",
@@ -24,19 +31,13 @@ export const loginUser = async(formData: FormData) => {
           password,
         });
 
-        // if (!result || !result.ok) {
-        //   return { success: false, error: "Invalid login credentials" };
-        // }
+        if (!result ) {
+          return { success: false, error: "Invalid login credentials" };
+        }
     
-        // Connect to the database and fetch user data
-        // await connectMongoDb();
-        // const user = await User.findOne({ email });
-    
-        // if (!user) {
-        //   return { success: false, error: "User not found" };
-        // }  
+
         revalidatePath('/dashboard');
-        return { success: true, user: {name: email}};
+        return { success: true, user: {name: user.name}};
 
       }
       catch (error) {
