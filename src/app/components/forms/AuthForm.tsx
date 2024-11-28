@@ -121,8 +121,8 @@ const AuthForm:React.FC<AuthFormProps> = ({
   }, []);
 
   const isRegisterErrors = (
-    errors: Partial<FieldErrors<LogInput | RegInput>>
-  ): errors is Partial<FieldErrors<RegInput>> => {
+    errors: Partial<FieldErrors <LogInput | RegInput>>
+  ): errors is Partial <FieldErrors<RegInput>> => {
     return 'name' in errors;
   };
 
