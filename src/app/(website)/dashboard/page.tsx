@@ -1,3 +1,4 @@
+import capitalize from '@/lib/capitalize'
 import { getSession } from '@/lib/getSession'
 import { redirect } from 'next/navigation'
 
@@ -13,7 +14,7 @@ const DashboardPage = async () => {
   }
   return (
     <div className='grid gap-1' >
-      <p>Logged in as  {userName}</p>
+      <p>Logged in as  {userName && capitalize(userName)}</p>
       <p>with email {userEmail}</p>
     </div>
   )
