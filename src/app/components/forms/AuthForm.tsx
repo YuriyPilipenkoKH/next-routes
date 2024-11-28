@@ -154,11 +154,11 @@ const AuthForm:React.FC<AuthFormProps> = ({
               : 'name'}
             />
         </label>
-        {isRegisterErrors(errors) && errors.name && (
+        {/* {isRegisterErrors(errors) && errors.name && (
           <AuthError className="autherror w-full">
             {errors.name.message}
           </AuthError>
-        )}
+        )} */}
       </>
       )}
       <label >
@@ -187,11 +187,11 @@ const AuthForm:React.FC<AuthFormProps> = ({
         { isLoading  ? "Sending.." : (formName === 'registerForm' )
           ? 'Register'  : 'Login'}
       </CancelBtn>
-      {(errors?.name || errors?.email || errors?.password ) && (
+      {(isRegisterErrors(errors) && errors.name || errors?.email || errors?.password ) && (
 				<AuthError className="autherror w-full">
-					{errors.name && <div>{errors.name.message}</div>}
-					{!errors.name && errors.email && <div>{errors.email.message}</div>}
-					{!errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
+					{isRegisterErrors(errors) && errors.name && <div>{errors.name.message}</div>}
+					{isRegisterErrors(errors) && !errors.name && errors.email && <div>{errors.email.message}</div>}
+					{isRegisterErrors(errors) && !errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
 					{!errors && logError && <div>{logError}</div>}
 					<FlatBtn 
 						onClick={()=>reset()}>
