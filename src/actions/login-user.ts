@@ -24,19 +24,19 @@ export const loginUser = async(formData: FormData) => {
           password,
         });
 
-        if (!result || !result.ok) {
-          return { success: false, error: "Invalid login credentials" };
-        }
+        // if (!result || !result.ok) {
+        //   return { success: false, error: "Invalid login credentials" };
+        // }
     
         // Connect to the database and fetch user data
-        await connectMongoDb();
-        const user = await User.findOne({ email });
+        // await connectMongoDb();
+        // const user = await User.findOne({ email });
     
-        if (!user) {
-          return { success: false, error: "User not found" };
-        }  
-        revalidatePath('/dashboard');
-        return { success: true, user: { name: user.name } };
+        // if (!user) {
+        //   return { success: false, error: "User not found" };
+        // }  
+        // revalidatePath('/dashboard');
+        // return { success: true, user: { name: user.name } };
       }
       catch (error) {
         const someError = error as CredentialsSignin;
@@ -44,6 +44,7 @@ export const loginUser = async(formData: FormData) => {
       }
       
 
-
-      // return { success: true, user: {name: ''}};
+      revalidatePath('/dashboard');
+      return { success: true, user: {name: ''}};
+      // return { success: true, user: { name: user.name } };
 }

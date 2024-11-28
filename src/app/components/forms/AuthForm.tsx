@@ -178,19 +178,21 @@ const AuthForm:React.FC<AuthFormProps> = ({
         type='submit'
         disabled={isSubmitting || !isDirty || !isValid}
             >
-        {formName === 'loginForm' ? 'Login' : 'Register'}
+        { isLoading  ? "Sending.." : (formName === 'registerForm' )
+          ? 'Register'  : 'Login'}
       </CancelBtn>
-      {( errors?.email || errors?.password  || logError) && (
-        <AuthError className="autherror w-full">
-          {errors.email && <div>{errors.email.message}</div>}
-          {!errors.email && errors.password && <div>{errors.password.message}</div>}
-          {!errors && logError && <div>{logError}</div>}
-          <FlatBtn 
-            onClick={()=>reset()}>
-              <CgCloseO size={30} />
-          </FlatBtn>
-        </AuthError>
-      )}
+      {(errors?.name || errors?.email || errors?.password ) && (
+				<AuthError className="autherror w-full">
+					{errors.name && <div>{errors.name.message}</div>}
+					{!errors.name && errors.email && <div>{errors.email.message}</div>}
+					{!errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
+					{!errors && logError && <div>{logError}</div>}
+					<FlatBtn 
+						onClick={()=>reset()}>
+							<CgCloseO size={30} />
+					</FlatBtn>
+				</AuthError>
+				)}
 
     </form>
     </FormWrapper>
