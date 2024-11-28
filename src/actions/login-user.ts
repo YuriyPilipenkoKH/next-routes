@@ -12,7 +12,7 @@ export const loginUser = async(formData: FormData) => {
   const password = formData.get('password') as string;
 
       // Validation for required fields
-      if ( !email || !password) {
+      if ( !email || !password ) {
         return { success: false, error: "All fields are required" }
       }
 

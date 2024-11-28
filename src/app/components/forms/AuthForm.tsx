@@ -8,7 +8,7 @@ import { AuthFormBaseTypes,  AuthInput,  FormName } from '@/types/formTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { FieldErrors, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import FormWrapper from './FormWrapper'
 import { AuthError, FormInput,  } from './FormStyles.styled'
@@ -121,6 +121,12 @@ const AuthForm:React.FC<AuthFormProps> = ({
     fetchCsrfToken();
   }, []);
 
+  const isRegisterErrors = (
+    errors: Partial<FieldErrors<LogInput | RegInput>>
+  ): errors is Partial<FieldErrors<RegInput>> => {
+    return 'name' in errors;
+  };
+
 
   return (
     <FormWrapper 
@@ -148,11 +154,11 @@ const AuthForm:React.FC<AuthFormProps> = ({
               : 'name'}
             />
         </label>
-        {/* {errors?.name && (
-        <AuthError className="autherror w-full">
-          <div>{errors.name.message }</div>
-        </AuthError>
-        )} */}
+        {isRegisterErrors(errors) && errors.name && (
+          <AuthError className="autherror w-full">
+            {errors.name.message}
+          </AuthError>
+        )}
       </>
       )}
       <label >
@@ -226,3 +232,10 @@ export default AuthForm
     // const hasNameError = (errors: FieldErrors<any>): errors is FieldErrors<{ name: string }> => {
   //   return 'name' in errors;
   // };
+
+
+        // {errors?.name && (
+        // <AuthError className="autherror w-full">
+        //   <div>{errors.name.message }</div>
+        // </AuthError>
+        // )} 
