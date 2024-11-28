@@ -35,16 +35,14 @@ export const loginUser = async(formData: FormData) => {
         // if (!user) {
         //   return { success: false, error: "User not found" };
         // }  
-        // revalidatePath('/dashboard');
-        // return { success: true, user: { name: user.name } };
+        revalidatePath('/dashboard');
+        return { success: true, user: {name: email}};
+
       }
       catch (error) {
         const someError = error as CredentialsSignin;
         return { success: false, error: someError.cause } ;
       }
-      
-
-      revalidatePath('/dashboard');
-      return { success: true, user: {name: ''}};
+  
       // return { success: true, user: { name: user.name } };
 }
