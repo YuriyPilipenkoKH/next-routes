@@ -62,6 +62,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
           reset();
           router.push('/dashboard')
       } 
+      else if (!result.success) {
+        toast.error(`${result?.error}`);
+      }
     } 
     catch 
     (error) {

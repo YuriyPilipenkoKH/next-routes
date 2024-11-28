@@ -21,9 +21,9 @@ export const loginUser = async(formData: FormData) => {
         await connectMongoDb();
         const user = await User.findOne({ email });
     
-        // if (!user) {
-        //   return { success: false, error: "User not found" };
-        // }  
+        if (!user) {
+          return { success: false, error: "User not found" };
+        }  
         const result =  await signIn("credentials", {
           redirect: false,
           callbackUrl: "/",

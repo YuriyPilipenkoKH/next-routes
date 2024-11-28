@@ -91,6 +91,10 @@ const AuthForm:React.FC<AuthFormProps> = ({
         reset();
         router.push('/login');
       }
+      else if (!result.success) {
+        console.log(result.error);
+        
+      }
     }
   } catch (error) {
     const errorMessage =
