@@ -2,7 +2,6 @@
 import { registerUser } from '@/actions/register-user'
 import capitalize from '@/lib/capitalize'
 import { retrieveToken } from '@/lib/retrieveToken'
-import { wait } from '@/lib/wait'
 import { LogInput, LoginSchema, RegInput, RegisterSchema } from '@/models/auth'
 import { AuthFormBaseTypes,  AuthInput,  FormName } from '@/types/formTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -154,11 +153,6 @@ const AuthForm:React.FC<AuthFormProps> = ({
               : 'name'}
             />
         </label>
-        {/* {isRegisterErrors(errors) && errors.name && (
-          <AuthError className="autherror w-full">
-            {errors.name.message}
-          </AuthError>
-        )} */}
       </>
       )}
       <label >
@@ -233,7 +227,7 @@ export default AuthForm
   //   return 'name' in errors;
   // };
 
-
+// example to be written under every input
         // {errors?.name && (
         // <AuthError className="autherror w-full">
         //   <div>{errors.name.message }</div>
