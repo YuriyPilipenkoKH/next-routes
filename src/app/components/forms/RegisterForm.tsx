@@ -68,7 +68,10 @@ const {
             reset();
             router.push('/login') // Redirect without reloading page
             // window.location.href = '/login'; // Redirect the user after success
-        }          
+        } 
+        else if (!result.success) {
+          toast.error(`${result?.error}`);
+        }         
       } 
     catch 
       (error) {
