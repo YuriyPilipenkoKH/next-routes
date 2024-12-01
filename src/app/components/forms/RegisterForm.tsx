@@ -66,7 +66,7 @@ const {
             reset();
             await wait(2000)
             reset();
-            // router.push('/login') // Redirect without reloading page
+            router.push('/login') // Redirect without reloading page
             // window.location.href = '/login'; // Redirect the user after success
         } 
         else if (!result.success) {

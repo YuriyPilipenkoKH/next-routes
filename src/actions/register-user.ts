@@ -34,6 +34,13 @@ export const registerUser = async(formData: FormData) => {
       const {password:_, _id,  __v, ...plainUser} = newUser.toObject();
       console.log(plainUser );
       
+      const allowedEmails = process.env.ALLOWED_EMAILS?.split(',') || [];
+
+      if (allowedEmails.includes(email)) {
+        console.log('Email is allowed');
+      } else {
+        console.log('Email is not allowed');
+      }
 
     revalidatePath('/login');
     return { success: true, user: plainUser };
@@ -43,9 +50,6 @@ export const registerUser = async(formData: FormData) => {
       console.error('Error occurred while registering:', error);
       const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
       return { success: false, error: errorMessage }
-    }
-    finally{
-      redirect('/login');
     }
 
   
