@@ -38,12 +38,13 @@ export const registerUser = async(formData: FormData) => {
 
       if (allowedEmails.includes(email)) {
         console.log('Email is allowed');
+        revalidatePath('/login');
+        return { success: true, user: plainUser };
       } else {
         console.log('Email is not allowed');
+        return { success: false, error: "Email is not allowed" };
       }
 
-    revalidatePath('/login');
-    return { success: true, user: plainUser };
 
       
     } catch (error) {
