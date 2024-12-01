@@ -4,6 +4,7 @@ import connectMongoDb from "@/lib/mongo";
 import { User } from "@/models/User"
 import {hashSync} from 'bcrypt-ts'
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 
 export const registerUser = async(formData: FormData) => {
@@ -42,6 +43,9 @@ export const registerUser = async(formData: FormData) => {
       console.error('Error occurred while registering:', error);
       const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
       return { success: false, error: errorMessage }
+    }
+    finally{
+      redirect('/login');
     }
 
   
