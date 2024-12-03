@@ -30,14 +30,11 @@ export const registerUser = async(formData: FormData) => {
         const newUser = await User.create({
           name,
           email,
-          password: hashedPassword
+          password: hashedPassword || ''
         })
   
         // Convert Mongoose document to plain object and adjust _id
         const {password:_, _id,  __v, ...plainUser} = newUser.toObject();
-        console.log(plainUser );
-
-
         revalidatePath('/login');
         return { success: true, user: plainUser };
 
