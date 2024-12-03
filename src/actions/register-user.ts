@@ -20,7 +20,6 @@ export const registerUser = async(formData: FormData) => {
       await connectMongoDb()
 
       if (allowedEmails.includes(email)) {
-        console.log('Email is allowed');
 
         const existingUser = await User.findOne({email})
         if (existingUser) {
@@ -41,8 +40,8 @@ export const registerUser = async(formData: FormData) => {
 
         revalidatePath('/login');
         return { success: true, user: plainUser };
+
       } else {
-        console.log('Email is not allowed');
         return { success: false, error: "Email is not allowed" };
       }     
  
