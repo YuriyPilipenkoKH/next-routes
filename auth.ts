@@ -17,6 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           name: profile.name,
           email: profile.email,
           image: profile.picture, // Use the correct property for the image
+          password: 'hashedPassword'
         };
       },
     }),
@@ -82,9 +83,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
     async signIn({ user, account }) {
+      const allowedEmails = process.env.ALLOWED_EMAILS?.split(',') || [];
+
       if (account?.provider === "google") {
         try {
           const { email, name, image, id } = user;
+
+        //  email checking
+        if (!email) {
+          console.error("Missing email in user data");
+          return false; 
+        }
+
+        // checking for allowed email
+        if (!allowedEmails.includes(email)) {
+          console.error("Unauthorized email:", email);
+          return false; 
+        }
+
           await connectMongoDb();
           const alreadyUser = await User.findOne({ email });
 
