@@ -96,7 +96,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         // checking for allowed email
-        if (!allowedEmails.includes(email)) {
+        if (!allowedEmails.includes(email) || allowedEmails.length === 0) {
           console.error("Unauthorized email:", email);
           return false; 
         }
