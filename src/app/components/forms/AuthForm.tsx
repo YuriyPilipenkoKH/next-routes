@@ -128,9 +128,6 @@ const AuthForm:React.FC<AuthFormProps> = ({
   ): errors is Partial <FieldErrors<RegInput>> => {
     return 'name' in errors;
   };
-  console.log(errors);
-  
-
 
   return (
     <FormWrapper 
