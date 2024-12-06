@@ -17,19 +17,16 @@ import { loginUser } from '@/actions/login-user'
 
 
 interface AuthFormProps {
-  formName: string
   formProps: AuthFormBaseTypes
 }
 
-const AuthForm:React.FC<AuthFormProps> = ({
-    formName,
-    formProps
-  }) => {
+const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
   
   const [logError, setLogError] = useState<string>('')
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const router = useRouter()
   const {
+    formName,
     titleLabel,
     welcomeMsg,
     backButtonLabel, 
