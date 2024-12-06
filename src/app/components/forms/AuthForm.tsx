@@ -201,6 +201,9 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
 
 export default AuthForm
 
+
+// Debouncing is a great way to improve performance by limiting how often a function is executed, especially in scenarios like form input validation or API calls.
+
 // ===============================
 // const isRegisterData = (data: LogInput | RegInput): data is RegInput => {
 //   return (data as RegInput).name !== undefined;
