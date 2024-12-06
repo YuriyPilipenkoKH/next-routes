@@ -12,7 +12,7 @@ const AuthPage = async() => {
   return (
     <div>
       <AuthForm 
-      formProps={LoginFormProps }/>
+      formProps={ RegisterFormProps }/>
     </div>
   )
 }
