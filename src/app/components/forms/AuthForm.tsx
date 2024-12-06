@@ -63,6 +63,14 @@ const AuthForm:React.FC<AuthFormProps> = ({
     return (data as RegInput).name !== undefined;
   };
 
+  if (true) {
+    let errors = ''
+    errors = 'go'
+    console.log(errors);
+     
+  } 
+  console.log(errors);
+
 
   const onSubmit = async (data: LogInput | RegInput) => {
       const formData = new FormData();

@@ -17,7 +17,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           name: profile.name,
           email: profile.email,
           image: profile.picture, // Use the correct property for the image
-          password: 'hashedPassword'
         };
       },
     }),
