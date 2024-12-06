@@ -7,6 +7,8 @@ export interface FormBaseTypes {
   text?: string;
 }
 export interface AuthFormBaseTypes {
+
+  formName: 'loginForm' | 'registerForm';
   titleLabel: string;
   welcomeMsg: string
   backButtonLabel: string;
