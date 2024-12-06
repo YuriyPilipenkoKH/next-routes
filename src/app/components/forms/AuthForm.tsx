@@ -63,7 +63,6 @@ const AuthForm:React.FC<AuthFormProps> = ({
     return (data as RegInput).name !== undefined;
   };
 
-
   const onSubmit = async (data: LogInput | RegInput) => {
       const formData = new FormData();
     if (formName === 'registerForm' && isRegisterData(data)) {
@@ -129,6 +128,8 @@ const AuthForm:React.FC<AuthFormProps> = ({
   ): errors is Partial <FieldErrors<RegInput>> => {
     return 'name' in errors;
   };
+  console.log(errors);
+  
 
 
   return (
@@ -185,18 +186,19 @@ const AuthForm:React.FC<AuthFormProps> = ({
         { isLoading  ? "Sending.." : (formName === 'registerForm' )
           ? 'Register'  : 'Login'}
       </CancelBtn>
-      {(isRegisterErrors(errors) && errors.name || errors?.email || errors?.password ) && (
-				<AuthError className="autherror w-full">
-					{isRegisterErrors(errors) && errors.name && <div>{errors.name.message}</div>}
-					{isRegisterErrors(errors) && !errors.name && errors.email && <div>{errors.email.message}</div>}
-					{isRegisterErrors(errors) && !errors.name && !errors.email && errors.password && <div>{errors.password.message}</div>}
-					{!errors && logError && <div>{logError}</div>}
-					<FlatBtn 
-						onClick={()=>reset()}>
-							<CgCloseO size={30} />
-					</FlatBtn>
-				</AuthError>
-				)}
+
+
+        {(isRegisterErrors(errors)  || errors.email || errors.password || logError) && (
+          <AuthError className="autherror w-full">
+            { isRegisterErrors(errors) && errors.name && <div>{errors.name.message}</div>}
+            { !isRegisterErrors(errors) && errors.email && <div>{errors.email.message}</div>}
+            { !isRegisterErrors(errors) && !errors.email && errors.password && <div>{errors.password.message}</div>}
+            { !isRegisterErrors(errors) && !errors.email && !errors.password && logError && <div>{logError}</div>}
+            <FlatBtn onClick={() => reset()}>
+              <CgCloseO size={30} />
+            </FlatBtn>
+          </AuthError>
+        )}
 
     </form>
     </FormWrapper>
