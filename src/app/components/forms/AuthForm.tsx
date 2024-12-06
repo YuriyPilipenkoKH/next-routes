@@ -6,7 +6,7 @@ import { LogInput, LoginSchema, RegInput, RegisterSchema } from '@/models/auth'
 import { AuthFormBaseTypes,  AuthInput,  FormName } from '@/types/formTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FieldErrors, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import FormWrapper from './FormWrapper'
@@ -14,6 +14,7 @@ import { AuthError, FormInput,  } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { loginUser } from '@/actions/login-user'
+import { debounce } from '@/lib/debounce'
 
 
 interface AuthFormProps {
@@ -24,6 +25,7 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
   
   const [logError, setLogError] = useState<string>('')
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
+  const [formData, setFormData] = useState<Partial<LogInput | RegInput>>({});
   const router = useRouter()
   const {
     formName,
@@ -101,15 +103,32 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
   };
 
 
-  const handleInputChange = () => {
-  if (logError) {
-    setLogError('');
-  }
+  // const handleInputChange = () => {
+  // if (logError) {
+  //   setLogError('');
+  // }
+  // };
+
+  const handleDebouncedChange = useCallback(
+    debounce((name: string, value: string) => {
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+      if (logError) {
+        setLogError(''); // Clear error message when the user starts typing
+      }
+    }, 1000), // Adjust the debounce delay as needed
+    [logError]
+  );
+
+  const createChangeHandler = (name: string) => {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      handleDebouncedChange(name, value);
+    };
   };
 
   const onInvalid = () => {
-  setLogError('Please fill in all required fields');
-  };
+    setLogError('Please fill in all required fields');
+    };
 
   useEffect(() => {
     const fetchCsrfToken = async () => {
@@ -145,31 +164,25 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
       <>
         <label >
           <FormInput
-            {...register('name',
-              { onChange: handleInputChange })}
-              placeholder=	{( isSubmitting )
-              ? "Processing"
-              : 'name'}
+          {...register('name')}
+          onChange={createChangeHandler('name')}
+          placeholder={isSubmitting ? "Processing" : 'Name'}
             />
         </label>
       </>
       )}
       <label >
         <FormInput 
-          {...register('email', 
-            { onChange: handleInputChange })}
-            placeholder=	{( isSubmitting ) 
-            ? "Processing" 
-            : 'email'}
+          {...register('email')}
+          onChange={createChangeHandler('email')}
+          placeholder={isSubmitting ? "Processing" : 'Email'}
           />
       </label>
       <label >
         <FormInput 
-          {...register('password',
-             { onChange: handleInputChange })}
-            placeholder=	{( isSubmitting ) 
-            ? "Processing" 
-            : 'password'}
+          {...register('password')}
+          onChange={createChangeHandler('password')}
+          placeholder={isSubmitting ? "Processing" : 'Password'}
           />
       </label>
       <CancelBtn 
