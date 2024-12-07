@@ -1,4 +1,4 @@
-// 'use server'
+
 import React from 'react'
 import FormHeader from './FormHeader';
 import { BtnX } from '../Button/Button';
