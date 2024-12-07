@@ -112,18 +112,20 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
   const handleDebouncedChange = useCallback(
     debounce((name: string, value: string) => {
       setFormData((prevData) => ({ ...prevData, [name]: value }));
-      if (logError) {
-        setLogError(''); // Clear error message when the user starts typing
-      }
+
     }, 1000), // Adjust the debounce delay as needed
-    [logError]
+    []
   );
 
   const createChangeHandler = (name: string) => {
+    if (logError) {
+      setLogError(''); // Clear error message when the user starts typing
+    }
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       handleDebouncedChange(name, value);
     };
+
   };
 
   const onInvalid = () => {
