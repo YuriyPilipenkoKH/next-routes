@@ -114,7 +114,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
               { onChange: handleInputChange })}
               placeholder=	{( isSubmitting ) 
               ? "Processing" 
-              : 'email'}
+              : 'Email'}
             />
           </label>
           <label >
@@ -123,7 +123,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
               { onChange: handleInputChange })}
               placeholder=	{( isSubmitting ) 
               ? "Processing" 
-              : 'password'}
+              : 'Password'}
             />
           </label>
           <CancelBtn 

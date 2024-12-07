@@ -14,6 +14,7 @@ import { AuthError, FormInput,  } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { loginUser } from '@/actions/login-user'
+import {useDebouncedCallback} from 'use-debounce'
 
 
 interface AuthFormProps {
@@ -38,6 +39,7 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
     handleSubmit,
     formState,
     reset,
+    trigger
   } = useForm<LogInput | RegInput>({
     defaultValues:
     formName === 'loginForm'
@@ -100,11 +102,14 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
   }
   };
 
-  const handleInputChange = () => {
-  if (logError) {
-    setLogError('');
-  }
-  };
+
+  const handleInputChange = useDebouncedCallback(
+    (field: keyof LogInput | keyof RegInput) => {
+      setLogError('');
+      trigger(field); // Dynamically validate the field after debounce
+    },
+    1000 // 1-second debounce
+  );
 
   const onInvalid = () => {
     setLogError('Please fill in all required fields');
@@ -145,9 +150,11 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
         <>
           <label >
             <FormInput
-            {...register('name', {
-              onChange: handleInputChange,
-            })}
+            {...register('name')}
+            onChange={(e) => {
+              register('name').onChange(e); // Retain react-hook-form's internal logic
+              handleInputChange('name'); // Debounced error clearing and validation
+            }}
             placeholder={isSubmitting ? "Processing" : 'Name'}
               />
           </label>
@@ -155,17 +162,21 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
         )}
         <label >
           <FormInput
-            {...register('email', {
-              onChange: handleInputChange,
-            })}
+            {...register('email')}
+            onChange={(e) => {
+              register('email').onChange(e);
+              handleInputChange('email');
+            }}
             placeholder={isSubmitting ? "Processing" : 'Email'}
             />
         </label>
         <label >
           <FormInput
-            {...register('password', {
-              onChange: handleInputChange,
-            })}
+             {...register('password')}
+             onChange={(e) => {
+               register('password').onChange(e);
+               handleInputChange('password');
+             }}
             placeholder={isSubmitting ? "Processing" : 'Password'}
             />
         </label>
