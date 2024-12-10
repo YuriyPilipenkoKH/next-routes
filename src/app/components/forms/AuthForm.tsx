@@ -39,7 +39,8 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
     handleSubmit,
     formState,
     reset,
-    trigger
+    trigger, 
+    clearErrors 
   } = useForm<LogInput | RegInput>({
     defaultValues:
     formName === 'loginForm'
@@ -55,7 +56,7 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
       isDirty,
       isValid ,
       isSubmitting,
-      isLoading
+      isLoading 
   } = formState
 
   const isRegisterData = (data: LogInput | RegInput): data is RegInput => {
@@ -111,6 +112,14 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
     1000 // 1-second debounce
   );
 
+  const handleChange = useDebouncedCallback(
+    (field: string)  => {
+      if(logError) setLogError('')
+        console.log(field);
+    },
+    1000 // 1-second debounce
+  );
+
   const onInvalid = () => {
     setLogError('Please fill in all required fields');
     };
@@ -151,9 +160,8 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
           <label >
             <FormInput
             {...register('name')}
-            onChange={(e) => {
-              register('name').onChange(e); // Retain react-hook-form's internal logic
-              handleInputChange('name'); // Debounced error clearing and validation
+            onChange={(e)=> {
+              handleChange(e.target.value)
             }}
             placeholder={isSubmitting ? "Processing" : 'Name'}
               />
