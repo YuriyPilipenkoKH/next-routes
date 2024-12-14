@@ -40,7 +40,7 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
     formState,
     reset,
     trigger, 
-    clearErrors 
+   
   } = useForm<LogInput | RegInput>({
     defaultValues:
     formName === 'loginForm'
