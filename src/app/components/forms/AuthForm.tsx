@@ -192,7 +192,10 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
               { !isRegisterErrors(errors) && errors.email && <div>{errors.email.message}</div>}
               { !isRegisterErrors(errors) && !errors.email && errors.password && <div>{errors.password.message}</div>}
               { !isRegisterErrors(errors) && !errors.email && !errors.password && logError && <div>{logError}</div>}
-              <FlatBtn onClick={() => reset()}>
+              <FlatBtn onClick={() => {
+                setLogError('')
+                reset()
+                }}>
                 <CgCloseO size={30} />
               </FlatBtn>
             </AuthError>
