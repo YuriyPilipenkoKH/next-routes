@@ -181,7 +181,7 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
         <CancelBtn
           className='mt-auto '
           type='submit'
-          disabled={isSubmitting || !isDirty || !isValid}
+          disabled={isSubmitting || !isDirty || !isValid || !!logError}
               >
           { isLoading  ? "Sending.." : (formName === 'registerForm' )
             ? 'Register'  : 'Login'}
