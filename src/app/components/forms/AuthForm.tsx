@@ -92,6 +92,8 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
         router.push('/login');
       }
       else if (!result.success) {
+
+        setLogError(result?.error || '');
         console.log(result.error);
         
       }
@@ -110,12 +112,6 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
       console.log(field);
       
     }
-
-  // const handleChange = 
-  //   (field: string)  => {
-  //     if(logError) setLogError('')
-  //       console.log(field);
-  //   }
     
   const onInvalid = () => {
     setLogError('Please fill in all required fields');
@@ -166,11 +162,11 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
         )}
         <label >
         <FormInput 
-          {...register('password', { onChange: handleInputChange })}
-            placeholder=	{( isSubmitting ) 
-            ? "Processing" 
-            : 'password'}
-          />
+        {...register('email', { onChange: handleInputChange })}
+          placeholder=	{( isSubmitting ) 
+          ? "Processing" 
+          : 'email'}
+        />
         </label>
         <label >
           <FormInput
