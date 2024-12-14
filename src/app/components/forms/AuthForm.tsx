@@ -14,7 +14,8 @@ import { AuthError, FormInput,  } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { loginUser } from '@/actions/login-user'
-import {useDebouncedCallback} from 'use-debounce'
+import { log } from 'console'
+
 
 
 interface AuthFormProps {
@@ -104,22 +105,18 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
   };
 
 
-  const handleInputChange = useDebouncedCallback(
-    (field: keyof LogInput | keyof RegInput) => {
-      setLogError('');
-      trigger(field); // Dynamically validate the field after debounce
-    },
-    1000 // 1-second debounce
-  );
+  const handleInputChange =   (field: keyof LogInput | keyof RegInput) => {
+    if(logError) setLogError('')
+      console.log(field);
+      
+    }
 
-  const handleChange = useDebouncedCallback(
-    (field: string)  => {
-      if(logError) setLogError('')
-        console.log(field);
-    },
-    1000 // 1-second debounce
-  );
-
+  // const handleChange = 
+  //   (field: string)  => {
+  //     if(logError) setLogError('')
+  //       console.log(field);
+  //   }
+    
   const onInvalid = () => {
     setLogError('Please fill in all required fields');
     };
@@ -158,25 +155,22 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
         {(formName === 'registerForm') && (
         <>
           <label >
-            <FormInput
-            {...register('name')}
-            onChange={(e)=> {
-              handleChange(e.target.value)
-            }}
-            placeholder={isSubmitting ? "Processing" : 'Name'}
-              />
+          <FormInput 
+          {...register('name', { onChange: handleInputChange })}
+            placeholder=	{( isSubmitting ) 
+            ? "Processing" 
+            : 'name'}
+          />
           </label>
         </>
         )}
         <label >
-          <FormInput
-            {...register('email')}
-            onChange={(e) => {
-              register('email').onChange(e);
-              handleInputChange('email');
-            }}
-            placeholder={isSubmitting ? "Processing" : 'Email'}
-            />
+        <FormInput 
+          {...register('password', { onChange: handleInputChange })}
+            placeholder=	{( isSubmitting ) 
+            ? "Processing" 
+            : 'password'}
+          />
         </label>
         <label >
           <FormInput
