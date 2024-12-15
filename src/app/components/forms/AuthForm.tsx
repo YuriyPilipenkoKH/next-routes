@@ -14,8 +14,6 @@ import { AuthError, FormInput,  } from './FormStyles.styled'
 import { CancelBtn, FlatBtn } from '../Button/Button'
 import { CgCloseO } from 'react-icons/cg'
 import { loginUser } from '@/actions/login-user'
-import { log } from 'console'
-
 
 
 interface AuthFormProps {
@@ -40,8 +38,6 @@ const AuthForm:React.FC<AuthFormProps> = ({formProps}) => {
     handleSubmit,
     formState,
     reset,
-    trigger, 
-   
   } = useForm<LogInput | RegInput>({
     defaultValues:
     formName === 'loginForm'
