@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema({
     authProviderId: {type: String},
     role: {
         type: String,
-        enum: ['admin', 'user', 'editor'], // Allowed roles
-        default: 'user', // Default role
+        enum: ['creator', 'dude', 'patron'], // Allowed roles
+        default: 'dude', // Default role
     }
 })
 // Infer the type of the schema
