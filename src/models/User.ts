@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { InferSchemaType } from "mongoose";
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -21,10 +21,12 @@ const userSchema = new mongoose.Schema({
         default: 'user', // Default role
     }
 })
+// Infer the type of the schema
+type UserDocument = InferSchemaType<typeof userSchema>;
 
 export const User = mongoose.models?.User || mongoose.model('User', userSchema)
 
 export interface UserRoleProps {
-    user: typeof User;
+    user: UserDocument; // Use the inferred schema type
     onRoleChange: (userId: string, newRole: string) => void;
   }
