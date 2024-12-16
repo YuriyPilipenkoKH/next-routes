@@ -1,6 +1,7 @@
 import mongoose, { InferSchemaType } from "mongoose";
 
 const userSchema = new mongoose.Schema({
+    _id: {type: String,},
     name: {
         type: String,
         required: true,
@@ -17,12 +18,12 @@ const userSchema = new mongoose.Schema({
     authProviderId: {type: String},
     role: {
         type: String,
-        enum: ['creator', 'dude', 'patron'], // Allowed roles
-        default: 'dude', // Default role
+        enum: ['user', 'admin', 'editor'], // Allowed roles
+        default: 'user', // Default role
     }
 })
-// Infer the type of the schema
-type UserDocument = InferSchemaType<typeof userSchema>;
+// Infer the type of the schema and fix `_id` type
+type UserDocument = Omit<InferSchemaType<typeof userSchema>, '_id'> & { _id: string };
 
 export const User = mongoose.models?.User || mongoose.model('User', userSchema)
 
