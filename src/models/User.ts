@@ -14,7 +14,12 @@ const userSchema = new mongoose.Schema({
         select: false,
     },
     image: {type: String},
-    authProviderId: {type: String}
+    authProviderId: {type: String},
+    role: {
+        type: String,
+        enum: ['admin', 'user', 'editor'], // Allowed roles
+        default: 'user', // Default role
+    }
 })
 
 export const User = mongoose.models?.User || mongoose.model('User', userSchema)
