@@ -9,8 +9,8 @@ const AdminPage =async () => {
     
   }
   return (
-    <div>Admin page
-
+    <div>
+      <h2>Admin page</h2>
       {/* <UserRoleManager 
       user={user} 
       onRoleChange ={change}
