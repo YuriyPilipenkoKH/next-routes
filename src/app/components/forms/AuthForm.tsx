@@ -2,7 +2,7 @@
 import { registerUser } from '@/actions/register-user'
 import capitalize from '@/lib/capitalize'
 import { retrieveToken } from '@/lib/retrieveToken'
-import { LogInput, LoginSchema, RegInput, RegisterSchema } from '@/models/auth'
+import { LogInput, LoginSchema, RegInput, RegisterSchema } from '@/models/schemas'
 import { AuthFormBaseTypes, } from '@/types/formTypes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'

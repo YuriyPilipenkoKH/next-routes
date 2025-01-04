@@ -21,21 +21,21 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-[100vh]`}
-      >
-        {children}
-        <Toaster 
-          position="top-center" 
-          toastOptions={options} 
-          gutter={24} />
-      </body>
-    </html>
-  );
-}
+    children,
+  }: Readonly<{
+    children: React.ReactNode;
+  }>) {
+    return (
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased h-[100vh]`}
+        >
+          {children}
+          <Toaster 
+            position="top-center" 
+            toastOptions={options} 
+            gutter={24} />
+        </body>
+      </html>
+    );
+  }

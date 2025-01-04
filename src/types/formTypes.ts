@@ -1,4 +1,4 @@
-import { LogInput, RegInput } from "@/models/auth";
+import { LogInput, RegInput } from "@/models/schemas";
 
 export interface FormBaseTypes {
   formName: string;

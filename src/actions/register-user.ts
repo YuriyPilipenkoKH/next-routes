@@ -42,7 +42,8 @@ export const registerUser = async(formData: FormData) => {
         return { success: false, error: "Email is not allowed" };
       }     
  
-    } catch (error) {
+    }
+     catch (error) {
       console.error('Error occurred while registering:', error);
       const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
       return { success: false, error: errorMessage }
