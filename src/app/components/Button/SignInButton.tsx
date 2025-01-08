@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { googleSignIn } from '@/actions/google-signin'
 
 const SignInButton = () => {
-  const [state, formAction, isPending] = useActionState(googleSignIn, undefined)
+  const [message, formAction, isPending] = useActionState(googleSignIn, undefined)
 
     return (
     <form
@@ -14,6 +14,7 @@ const SignInButton = () => {
       <button className='flex w-full justify-center border rounded-lg p-2 space-x-2 items-center'>
           <p>LogIn With Google</p> <FcGoogle className='h-5 w-5' />
       </button>
+      {isPending ? "Loading..." : message}
     </form>
     )
 
