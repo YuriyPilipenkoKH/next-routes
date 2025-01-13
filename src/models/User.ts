@@ -1,7 +1,7 @@
 import mongoose, { InferSchemaType } from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    _id: {type: String,},
+    _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
     name: {
         type: String,
         required: true,
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         select: false,
     },
     image: {type: String},
-    authProviderId: {type: String},
+    authProviderId: { type: String },
     role: {
         type: String,
         enum: ['user', 'admin', 'editor'], // Allowed roles

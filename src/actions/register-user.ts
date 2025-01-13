@@ -12,6 +12,11 @@ export const registerUser = async(formData: FormData) => {
   const password = formData.get('password') as string;
   const allowedEmails = process.env.ALLOWED_EMAILS?.split(',') || [];
 
+  console.log(name);
+  console.log(email);
+  console.log(password);
+  
+
     // Validation for required fields
     if (!name || !email || !password) {
       return { success: false, error: "All fields are required" }
@@ -20,19 +25,21 @@ export const registerUser = async(formData: FormData) => {
       await connectMongoDb()
 
       if (allowedEmails.includes(email)) {
-
+        console.log('allowedEmails',allowedEmails);
         const existingUser = await User.findOne({email})
+        console.log('existingUser',existingUser);
         if (existingUser) {
           return { success: false, error: "User already exists" };
         }
   
         const hashedPassword =  hashSync(password)
+        console.log('hashedPassword',hashedPassword);
         const newUser = await User.create({
           name,
           email,
           password: hashedPassword || ''
         })
-  
+        console.log('newUser',newUser);
         // Convert Mongoose document to plain object and adjust _id
         const {password:_, _id,  __v, ...plainUser} = newUser.toObject();
         revalidatePath('/login');
