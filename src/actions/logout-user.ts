@@ -2,7 +2,11 @@ import { signOut } from 'next-auth/react';
 
 export const logoutUser = async () => {
   try {
-    await signOut({ callbackUrl: '/login' }); // Перенаправление после выхода
+    await signOut({ callbackUrl: '/login' }); 
+    return { 
+      success: true, 
+      message: "Logout successfull.", 
+    }
   } catch (error) {
     console.error('Error during logout:', error);
   }
