@@ -7,6 +7,7 @@ const UsersList = () => {
     if (response.success && response.usersList) {
       // setList(response.data.usersList);
       console.log(response.usersList);
+      console.log(result);
       
     }
     })

@@ -44,7 +44,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
       isDirty,
       isValid ,
       isSubmitting,
-      isLoading
   } = formState
   const onSubmit = async (data: LogInput) => {
 
