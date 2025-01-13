@@ -1,6 +1,7 @@
 import NextAuth, {CredentialsSignin} from "next-auth"
 import Credentials from 'next-auth/providers/credentials'
 import Google from "next-auth/providers/google"
+import GitHub from "next-auth/providers/github"
 import {compare} from 'bcrypt-ts'
 import { User } from "@/models/User"
 import connectMongoDb from "@/lib/mongo"
@@ -19,6 +20,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           image: profile.picture, // Use the correct property for the image
         };
       },
+    }),
+    GitHub({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+      // async profile(profile) {
+      //   // You can customize the user object returned here
+      //   return {
+      //     id: profile.id,
+      //     name: profile.name,
+      //     email: profile.email,
+      //     image: profile.picture, // Use the correct property for the image
+      //   };
+      // },
     }),
     Credentials({
       name: 'Credentials',

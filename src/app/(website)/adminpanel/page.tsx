@@ -1,14 +1,15 @@
-import UserRoleManager from '@/app/components/User/UserRoleManager'
+
 import UsersList from '@/app/components/User/UsersList'
 import { getSession } from '@/lib/getSession'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
 const AdminPage =async () => {
   const session = await getSession()
-  const user = session?.user
-  const change =() => {
-    
-  }
+    if (!session) {
+      redirect('/login')
+    }
+
   return (
     <div>
       <h2>Admin page</h2>
