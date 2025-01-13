@@ -9,7 +9,7 @@ interface SignInButtonProps {
 
 const SignInButton = ({provider}:SignInButtonProps) => {
   const logAction = (provider === 'google') ? googleSignIn : githubSignIn
-  const [message, formAction, isPending] = useActionState(googleSignIn, undefined)
+  const [message, formAction, isPending] = useActionState(logAction, undefined)
 
     return (
     <form
