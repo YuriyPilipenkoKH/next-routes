@@ -1,7 +1,7 @@
 'use client'
 import React, { useActionState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { googleSignIn } from '@/actions/google-signin'
+import { googleSignIn } from '@/actions/oauth-signin'
 
 const SignInButton = () => {
   const [message, formAction, isPending] = useActionState(googleSignIn, undefined)
