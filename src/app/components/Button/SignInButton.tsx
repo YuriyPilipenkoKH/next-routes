@@ -2,6 +2,7 @@
 import React, { useActionState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { githubSignIn, googleSignIn } from '@/actions/oauth-signin'
+import { GrGithub } from "react-icons/gr";
 
 interface SignInButtonProps {
   provider: "google" | "github"
@@ -17,7 +18,13 @@ const SignInButton = ({provider}:SignInButtonProps) => {
       action={formAction}
       >
       <button className='flex w-full justify-center border rounded-lg p-2 space-x-2 items-center'>
-          <p>LogIn With Google</p> <FcGoogle className='h-5 w-5' />
+      <p>
+            {`LogIn With ${(provider === 'google') ? 'Google' : 'Github'}`}
+            </p> 
+            {(provider === 'google') 
+            ? <FcGoogle className='h-5 w-5' />
+            : <GrGithub className='h-5 w-5' />
+            }
       </button>
       {isPending ? "Loading..." : message}
     </form>
