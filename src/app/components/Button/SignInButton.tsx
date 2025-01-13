@@ -1,13 +1,14 @@
 'use client'
 import React, { useActionState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { googleSignIn } from '@/actions/oauth-signin'
+import { githubSignIn, googleSignIn } from '@/actions/oauth-signin'
 
 interface SignInButtonProps {
   provider: "google" | "github"
 }
 
 const SignInButton = ({provider}:SignInButtonProps) => {
+  const logAction = (provider === 'google') ? googleSignIn : githubSignIn
   const [message, formAction, isPending] = useActionState(googleSignIn, undefined)
 
     return (
