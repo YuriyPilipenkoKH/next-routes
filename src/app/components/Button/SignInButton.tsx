@@ -3,6 +3,10 @@ import React, { useActionState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { googleSignIn } from '@/actions/oauth-signin'
 
+interface SignInButtonProps {
+  provider: "google" | "github"
+}
+
 const SignInButton = () => {
   const [message, formAction, isPending] = useActionState(googleSignIn, undefined)
 
