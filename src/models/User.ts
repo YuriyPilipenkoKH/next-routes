@@ -37,3 +37,15 @@ export interface UserRoleProps {
     user: UserDocument; // Use the inferred schema type
     onRoleChange: (userId: string, newRole: string) => void;
   }
+
+
+//   example
+const exampleUserSchema = new mongoose.Schema({
+    _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, select: false },
+    image: { type: String },
+    authProviderId: { type: String },
+    role: { type: String, enum: Object.values(Roles), default: Roles.User },
+});
