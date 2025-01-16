@@ -1,5 +1,11 @@
 import mongoose, { InferSchemaType } from "mongoose";
 
+export enum Roles {
+    User = "user",
+    Admin = "admin",
+    Editor = "editor",
+}
+
 const userSchema = new mongoose.Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
     name: {
@@ -18,8 +24,8 @@ const userSchema = new mongoose.Schema({
     authProviderId: { type: String },
     role: {
         type: String,
-        enum: ['user', 'admin', 'editor'], // Allowed roles
-        default: 'user', // Default role
+        enum: Object.values(Roles), // Allowed roles
+        default: Roles.User, // Default role
     }
 })
 // Infer the type of the schema and fix `_id` type
