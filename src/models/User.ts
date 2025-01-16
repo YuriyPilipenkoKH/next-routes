@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema({
     }
 })
 // Infer the type of the schema and fix `_id` type
+// Omit replaces `_id` type: mongoose.Schema.Types.ObjectId with string
 type UserDocument = Omit<InferSchemaType<typeof userSchema>, '_id'> & { _id: string };
 
 export const User = mongoose.models?.User || mongoose.model('User', userSchema)
@@ -40,12 +41,12 @@ export interface UserRoleProps {
 
 
 //   example
-const exampleUserSchema = new mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, select: false },
-    image: { type: String },
-    authProviderId: { type: String },
-    role: { type: String, enum: Object.values(Roles), default: Roles.User },
-});
+type exampleUserDocument = {
+    _id: string; // Overridden to be a string
+    name: string;
+    email: string;
+    password?: string;
+    image?: string;
+    authProviderId?: string;
+    role: string;
+};
