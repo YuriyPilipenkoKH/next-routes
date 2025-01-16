@@ -6,6 +6,7 @@ import React from 'react'
 
 const DashboardPage = async () => {
   const session = await getSession()
+  console.log(session);
   const user = session?.user
   const userName= user?.name
   const userEmail= user?.email
